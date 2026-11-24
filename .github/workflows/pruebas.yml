@@ -1,0 +1,28 @@
+# Pruebas del motor de MoodTrip en cada cambio (dentro de la app real, en Chrome sin ventana).
+# Solo en el repositorio público: ahí GitHub Actions es gratis e ilimitado.
+name: Pruebas
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  pruebas:
+    if: github.repository == 'asiernozalortega33-creator/moodtrip'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Sintaxis de los scripts
+        run: for f in js/*.js api/*.js; do node --check "$f"; done
+      - name: Instalar dependencias de las pruebas
+        working-directory: tests
+        run: npm install --no-audit --no-fund
+      - name: Pruebas del motor
+        working-directory: tests
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node run.js humo-ciudades.js nombres-duplicados.js horarios-discotecas.js validacion.js edicion.js presupuesto.js perfiles-af.js

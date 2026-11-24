@@ -6,6 +6,6 @@ set -e
 SRC="$(cd "$(dirname "$0")" && pwd)"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
-cp -r "$SRC/index.html" "$SRC/api" "$SRC/.vercel" "$SRC/.gitignore" "$SRC/vercel.json" "$TMP/"
+cp -r "$SRC/index.html" "$SRC/css" "$SRC/js" "$SRC/api" "$SRC/.vercel" "$SRC/.gitignore" "$SRC/vercel.json" "$TMP/"
 cd "$TMP"
 vercel deploy . --prod --yes

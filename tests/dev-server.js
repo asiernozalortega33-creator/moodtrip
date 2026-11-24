@@ -19,6 +19,7 @@ http.createServer(async (req, res) => {
   }
   const f = path.join(ROOT, u.pathname === "/" ? "index.html" : u.pathname);
   if (!f.startsWith(path.normalize(ROOT)) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.statusCode = 404; return res.end("not found"); }
-  res.setHeader("Content-Type", f.endsWith(".html") ? "text/html; charset=utf-8" : "application/octet-stream");
+  const MIME = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json", ".png": "image/png", ".svg": "image/svg+xml" };
+  res.setHeader("Content-Type", MIME[path.extname(f)] || "application/octet-stream");
   fs.createReadStream(f).pipe(res);
 }).listen(PORT, "127.0.0.1", () => console.log("dev en http://127.0.0.1:" + PORT));

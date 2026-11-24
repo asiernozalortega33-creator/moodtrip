@@ -34,7 +34,10 @@ app lo dice y abre el mapa de la zona: no se inventa nada. Auditoría y arquitec
 
 ## Stack
 
-Un solo `index.html` (sin build ni frameworks) y funciones serverless en `api/`:
+Sin build ni frameworks: `index.html` + `css/app.css` + scripts clásicos en `js/` (comparten el ámbito global y se
+cargan en este orden): `base.js` (opciones, iconos, destinos) → `guias.js` (27 guías y motor genérico) → `fichas.js`
+(interfaz común, imágenes, ficha, cuentas) → `motor.js` (motor de viaje, moods, edición, presupuesto; tipos documentados
+al principio) → `guias-mas.js` (guías añadidas después) → `app.js` (pantallas). Funciones serverless en `api/`:
 
 | Función | Qué hace | Variables de entorno |
 |---|---|---|
@@ -53,6 +56,8 @@ Pruebas del motor (en Chrome sin ventana, dentro de la app real):
 ```
 cd tests && npm install && node run.js
 ```
+
+En el repositorio público se ejecutan solas en cada cambio (GitHub Actions, `.github/workflows/pruebas.yml`).
 
 Atajo para ir directo a una pantalla: `#demo=Destino/días/moods/pantalla[/AAAA-MM-DD]`, por ejemplo
 `https://explora-mood.vercel.app/#demo=Granada/3/romantico,cultural/itin/2027-05-14`.

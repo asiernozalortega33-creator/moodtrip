@@ -17,7 +17,7 @@ se añade un LLM, debería ocupar solo la capa de explicar y personalizar textos
 
 | Pieza | Estado | Detalle |
 |---|---|---|
-| Frontend | Real | Un único `index.html` (~6.000 líneas, sin framework): flujo editorial oscuro de 12 pantallas, MapLibre + OpenFreeMap, PDF por impresión. |
+| Frontend | Real | `index.html` + `css/` + `js/` (sin framework ni build): flujo editorial oscuro de 12 pantallas, MapLibre + OpenFreeMap, PDF por impresión. |
 | Backend | Real, mínimo | Funciones de Vercel: `api/flight.js`, `api/places.js`, `api/events.js` y `api/route.js` (nueva). |
 | Base de datos | Real | Supabase (`user_data`: viajes y favoritos en JSON, RLS solo-dueño). Copia local en `localStorage`. |
 | Autenticación | Real | Supabase email + contraseña; modo local de respaldo (SHA-256 + sal; hash débil en `file://`). |
@@ -44,9 +44,10 @@ se añade un LLM, debería ocupar solo la capa de explicar y personalizar textos
 - **Municipios de Wikidata como sitios** («Boulogne-Billancourt»). Ahora se filtran por su descripción.
 
 **Arquitectura**
-- Monolito de un solo HTML con estado global y sin tipos. Funciona y despliega en segundos, pero cuesta mantenerlo.
-  Recomendación: extraer el motor (`planTrip` y sus ayudantes) a un módulo con JSDoc o TypeScript antes de añadir edición avanzada.
-- No había pruebas en el repositorio. Ahora están en `tests/` (sección 6).
+- **Hecho (24-11-2026):** el HTML único de ~6.500 líneas se ha separado en `css/app.css` y seis scripts en `js/` sin
+  cambiar la lógica (mismo orden, ámbito global compartido). Los tipos del motor están documentados con JSDoc al principio
+  de `js/motor.js`. Pendiente: pasar a módulos ES con imports explícitos y comprobar los tipos con TypeScript (`checkJs`).
+- Pruebas en `tests/` (sección 6), que se ejecutan solas en cada cambio del repositorio público (GitHub Actions).
 
 **Experiencia de usuario**
 - **Edición avanzada (hecha, 24-11-2026, ver sección 3 bis).**
