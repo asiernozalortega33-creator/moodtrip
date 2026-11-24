@@ -1,0 +1,7 @@
+{
+  "name": "explora-mood-tests",
+  "private": true,
+  "description": "Pruebas del motor de MoodTrip dentro de la app real (no se despliega: deploy.sh solo copia index.html, api y la configuración)",
+  "scripts": { "test": "node run.js" },
+  "devDependencies": { "puppeteer-core": "^23.11.1" }
+}
