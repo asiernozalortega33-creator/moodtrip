@@ -11,12 +11,13 @@ cena, copas y discoteca. Cada día tiene sentido geográfico, respeta horarios y
 - **34 ciudades hechas a mano** (Barcelona, Valencia, Granada, Málaga, Bilbao, Madrid, Sevilla, Roma, Nápoles, París,
   Budapest, Tokio…). Tienen coordenadas comprobadas en OpenStreetMap, horarios, días de cierre, reservas, noches de
   apertura de las discotecas y cómo subir a cada cerro. Cualquier otra ciudad usa una **guía automática** con Wikidata.
-- **Motor de viaje** propio y determinista. Hace cinco cosas:
+- **Motor de viaje** propio y determinista. Hace cuatro cosas:
   - días con tipo (llegada, barrio, excursión, vuelta) y zona;
   - horas reales (duración + trayecto con calles y cuestas);
   - comidas a la hora del país y atardecer a la hora real del ocaso;
-  - fiesta solo las noches en que abre la discoteca;
-  - «Cambiar» y «Quitar», que recalculan el día.
+  - fiesta solo las noches en que abre la discoteca.
+- **Edición del itinerario**: mover paradas, fijar horas y duraciones, añadir sitios sugeridos o tuyos y tiempo libre,
+  con un validador que no deja un día imposible (si no cabe, te dice por qué) y deshacer.
 - **Motor de moods**: valora cómo encajan tus moods con lo que hay en esa ciudad, con quién viajas, los días y el mes,
   y te sugiere otros con los sitios concretos que desbloquean. Siempre decides tú.
 - **Compañía**:

@@ -21,7 +21,7 @@
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,system-ui,sans-serif;color:var(--ink);background:var(--bg);min-height:100vh;overflow-x:hidden;line-height:1.47;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
   ::selection{background:rgba(0,113,227,.18)}
-  .wrap{max-width:800px;margin:0 auto;padding:40px 22px 80px;position:relative;z-index:1}
+  .wrap{max-width:800px;margin:0 auto;padding:40px 22px 80px;position:relative;z-index:1;overflow-x:clip} /* planificador antiguo (oculto tras el flujo nuevo): que no ensanche la página en el móvil */
   /* HEADER */
   header{text-align:center;margin:30px 0 40px;animation:rise .7s var(--ease) both}
   .badge{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:500;letter-spacing:.01em;color:var(--ink2);background:var(--fill);border:1px solid var(--line2);border-radius:980px;padding:7px 16px;margin-bottom:22px}
@@ -196,6 +196,7 @@
   .display{font-size:clamp(2.8rem,9vw,7rem);font-weight:600;letter-spacing:-.045em;line-height:.9;margin:0}
   .lead{font-size:clamp(1.05rem,2.3vw,1.7rem);color:#98a2b3;font-weight:400;margin:20px 0 32px;letter-spacing:-.01em}
   .land-form .flab{display:block;font-size:.8rem;color:#8a93a3;margin-bottom:12px;letter-spacing:.01em}
+  @media(max-width:480px){.land-nav{flex-wrap:wrap;gap:10px}.land-nav .nav-r{flex-wrap:wrap;justify-content:flex-end;gap:10px 14px;margin-left:auto}.land-nav .nav-r a{font-size:.84rem}}
   .flight-row{display:flex;align-items:center;gap:14px;border-bottom:1.5px solid rgba(255,255,255,.28);padding-bottom:11px;max-width:520px}
   .flight-row input{border:none;background:none;outline:none;font-family:inherit;color:#fff;color-scheme:dark}
   #landFlight{flex:1;font-size:clamp(1.2rem,3vw,1.6rem);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
@@ -480,6 +481,27 @@
   .scr-itin .conn .cmap{color:#8ab4ff;text-decoration:none;font-weight:600}.scr-itin .conn .cmap:hover{text-decoration:underline}
   .scr-itin .conn .ico{width:13px;height:13px;color:#8a93a3;vertical-align:-.18em;margin-right:1px}
   .conn .chow{flex-basis:100%;color:var(--ink3);font-size:.78rem}
+  .ico.r-up{transform:rotate(-90deg)}.ico.r-down{transform:rotate(90deg)}
+  .scr-itin .dacts{flex-wrap:wrap}
+  .dedit{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);font-size:.8rem;color:#c9d0da}
+  .dedit label{display:flex;align-items:center;gap:6px}.dedit input,.dedit select,.dadd input,.dadd select{font:inherit;font-size:.82rem;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:9px;padding:5px 8px;color-scheme:dark}
+  .dedit button,.dadd button,.adj-go{font:inherit;font-size:.8rem;font-weight:600;color:#111;background:#e6e9ee;border:0;border-radius:999px;padding:6px 13px;cursor:pointer}
+  .dedit .dauto{background:transparent;color:#aeb6c2;border:1px solid rgba(255,255,255,.2)}
+  .dnote{font-size:.76rem;color:#8a93a3;margin:4px 0 0}
+  .dmsg{display:flex;align-items:center;gap:10px;margin:0 0 16px;padding:10px 14px;border-radius:12px;font-size:.84rem;color:#cfe9d7;background:rgba(80,200,120,.09);border:1px solid rgba(80,200,120,.3)}
+  .dmsg.bad{color:#ffd9c2;background:rgba(255,140,80,.09);border-color:rgba(255,140,80,.35)}.dmsg .ico{width:16px;height:16px;flex:none}.dmsg span{flex:1}
+  .dmsg button{font:inherit;font-size:.78rem;font-weight:600;color:#111;background:#e6e9ee;border:0;border-radius:999px;padding:5px 12px;cursor:pointer}
+  .dadd{margin:26px 0 8px 86px;max-width:640px;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.035);border:1px dashed rgba(255,255,255,.16)}
+  .dadd h3{display:flex;align-items:center;gap:7px;margin:0 0 6px;font-size:.95rem;color:#fff}.dadd h3 .ico{width:16px;height:16px}
+  .dadd-sec{margin-top:12px;font-size:.82rem;color:#c9d0da}.dadd-sec>b{display:block;margin-bottom:6px;color:#e6e9ee}
+  .dadd-l{list-style:none;margin:0;padding:0;display:grid;gap:6px}.dadd-l li{display:flex;justify-content:space-between;align-items:center;gap:10px}.dadd-l em{color:#ffb38a;font-style:normal}
+  .dadd-r{display:flex;flex-wrap:wrap;gap:8px}.dadd-r input{flex:1;min-width:200px}
+  @media(max-width:860px){.dadd{margin-left:0}}
+  .itin-adj{margin:12px 0 4px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:.82rem;color:#c9d0da}
+  .itin-adj summary{display:flex;align-items:center;gap:7px;padding:10px 13px;cursor:pointer;font-weight:600;color:#e6e9ee;list-style:none}.itin-adj summary .ico{width:15px;height:15px}
+  .adj-b{padding:0 13px 13px;display:grid;gap:8px}.adj-l{font-size:.74rem;color:#8a93a3;text-transform:uppercase;letter-spacing:.05em}
+  .adj-c{display:flex;flex-wrap:wrap;gap:6px}.adj-c button{font:inherit;font-size:.76rem;color:#c9d0da;background:transparent;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 10px;cursor:pointer}
+  .adj-c button.on{color:#111;background:#e6e9ee;border-color:#e6e9ee}
   .ctr{display:none;align-items:center;gap:5px;font:inherit;font-size:.76rem;font-weight:600;color:#8ab4ff;background:rgba(74,144,255,.1);border:1px solid rgba(74,144,255,.3);border-radius:999px;padding:4px 10px;cursor:pointer}
   body.tr-on .ctr{display:inline-flex}.ctr .ico{width:13px;height:13px}
   .ctr-out{flex-basis:100%}.trx{margin:6px 0 0;font-size:.79rem;line-height:1.5;color:#c9d0da}.trx p{margin:4px 0}.trx .dim,.trx.dim{color:#8a93a3}.trx a{color:#8ab4ff}
@@ -2863,7 +2885,7 @@ function openModal(id){
   document.getElementById("mName").textContent=d.name;
   document.getElementById("mDesc").textContent=d.desc||("Plan sugerido para tu mood en "+d.destino+".");
   const info=getInfo(d);
-  const price=d.price&&d.price.txt?d.price.txt:(d.auto?"Sin datos fiables de precio: mira la carta y las reseñas en Google Maps.":info.price);
+  const price=d.price&&d.price.txt?d.price.txt:(d.own?"Lo has añadido tú: no tenemos su precio. Míralo en su web o en Google Maps.":d.auto?"Sin datos fiables de precio: mira la carta y las reseñas en Google Maps.":info.price);
   const rows=[["clock","Duración",d.dur?fmtDur(d.dur):(DUR[d.cat]||"1 – 2 h")],["calendar","Cuándo ir / ambiente",info.busy],["backpack","Qué llevar",info.bring],["wallet",d.price&&d.price.free?"Precio":"Precio orientativo",price]];
   if(d.book&&d.book[0]!=="opcional")rows.push(["ticket","Reserva",`Con ${d.book[0]} de antelación. ${d.book[1]}`]);
   else if(d.book)rows.push(["ticket","Reserva","No hace falta, pero online te ahorras la cola."]);
@@ -4005,6 +4027,7 @@ const PAIDK=new Set(["ruinas","museo","palacio","termas","zoo","crucero","torre"
 const PAIDX=/sagrada|sinagoga|san esteban|c[uú]pula|duomo|westminster|sainte-chapelle|santa sof|sant pau|catedral de sevilla|st\.? paul|alhambra|generalife|pante[oó]n|hospital de la santa|castel sant|jer[oó]nimos|parlamento|parliament|abad[ií]a del sacromonte|capilla real|cartuja/i;
 // precio honesto: "Gratis" cuando lo es, rango orientativo solo donde tenemos datos curados, y nada inventado en el resto
 function priceOf(a,cat,key){
+  if(a.own)return {txt:"",unknown:true}; // sitio añadido por el usuario: no sabemos su precio y no se inventa
   const curated=!a.auto;
   const vx=typeof VENUEX!=="undefined"&&VENUEX[a.nm]&&VENUEX[a.nm].price;
   if(vx&&/[^€\s\-–·]/.test(vx))return /gratis/i.test(vx)?{free:true,txt:vx}:{txt:vx};
@@ -4584,7 +4607,7 @@ function runSchedule(D,T){
     const c=(s.item&&s.item.c)||s.at||null;
     const km=prev&&c?hav(prev,c):null;
     const e=s.item?s.item.el:null;const [up,down]=climb(prevE,e);
-    const tr=out.length?travelMin(km,up,down,T&&T.o&&T.o.mayores?12:22):0;
+    const tr=out.length&&s.cat!=="pausa"?travelMin(km,up,down,T&&T.o&&T.o.mayores?12:22):0;
     let st=cur+tr,gap=0,wait=0;
     if(s.fixedAt!=null&&s.fixedAt>st){gap=s.fixedAt-st;st=s.fixedAt;}
     const H=s.item&&s.label!=="Excursión"&&(s.cat==="sight"||s.cat==="familia")?hoursOf(s.item,D.date):null;
@@ -4617,9 +4640,11 @@ function materialize(T,D){
       const a=s.item;const vcat=cat==="familia"?"sight":(cat==="merienda"?"comida":cat);
       const cl=closedOf(a.nm),bk=["sight","foto","atardecer","familia"].includes(cat)?bookOf(a.nm):null;
       row.push({time:hm(x.start),end:hm(x.end),ic:"",lb:s.label,cat,slot:s,a:{t:a.nm,d:a.d||"",q:a.q||a.nm,real:true,m:a.m||[],vcat,kind:a.kind,dur:s.dur,
-        price:priceOf(a,vcat,T.key),el:a.el,book:bk,closed:cl?{...cl,today:D.wd!=null&&cl.wds.includes(D.wd)}:null,near:a.near||null,auto:!!a.auto,sunset:s.sunset!=null?hm(s.sunset):null,
+        price:priceOf(a,vcat,T.key),el:a.el,own:!!a.own,book:bk,closed:cl?{...cl,today:D.wd!=null&&cl.wds.includes(D.wd)}:null,near:a.near||null,auto:!!a.auto,sunset:s.sunset!=null?hm(s.sunset):null,
         hours:x.H?{o:hm(x.H.o),c:hm(x.H.c).replace(/^00:00$/,"24:00"),known:x.H.known,txt:hoursTxt(x.H),late:x.over>0,cut:!!s.cut}:null,
         club:cat==="disco"?clubInfo(a,D.wd,D.date):null}});
+    }else if(s.gen&&s.cat==="pausa"){
+      row.push({time:hm(x.start),end:hm(x.end),ic:"",lb:s.label,cat:"libre",slot:s,a:{t:s.gen.t,d:s.gen.d,real:false,m:[],vcat:"libre",libre:true,dur:s.dur}});
     }else if(s.gen){
       row.push({time:hm(x.start),end:hm(x.end),ic:"",lb:s.label,cat,slot:s,a:{t:s.gen.t,d:s.gen.d,q:T.city,real:false,m:[],vcat:cat==="merienda"?"comida":cat,gm:s.gen.gm,dur:s.dur}});
     }
@@ -4731,6 +4756,137 @@ function swapSlot(T,d,slot){
   return true;
 }
 function removeSlot(T,d,slot){const D=T.days[d];const i=D.slots.indexOf(slot);if(i<0)return false;D.slots.splice(i,1);return true;}
+
+/* ===================== EDICIÓN AVANZADA DEL DÍA =====================
+   Mover paradas, fijar su hora y su duración, añadir un sitio (sugerido o propio) o tiempo libre.
+   Cada cambio pasa por el VALIDADOR: si deja el día imposible (llegar a un sitio cerrado, una parada que ya
+   no cabe, una hora a la que no llegas, la comida desplazada más de una hora…), se deshace y se explica por qué.
+   Las ediciones se guardan como una lista de operaciones que se vuelve a aplicar al reabrir el viaje
+   (el motor es determinista: el mismo viaje da siempre el mismo plan de partida). */
+const EDIT_MOVABLE=new Set(["sight","foto","compras","souvenir","familia","merienda","pausa"]);
+function slotName(s){return s.item?shortNm(s.item.nm):(s.gen?s.gen.t:"Esta parada");}
+// lo que está mal en un día tal y como está ahora (frases para el usuario)
+function dayProblems(T,D){
+  T.curDate=D.date;
+  const sch=runSchedule(D,T),placed=new Set(sch.map(x=>x.slot)),P=[];
+  D.slots.forEach(s=>{if(!s.off&&!placed.has(s))P.push({t:`${slotName(s)} ya no cabe ${D.end!=null?"antes de irte al aeropuerto":"en el día"}`,s});});
+  sch.forEach((x,k)=>{const s=x.slot,n=slotName(s);
+    if(x.over>0)P.push({t:x.start>=x.H.c?`${n} cierra a las ${hm(x.H.c)} y llegarías a las ${hm(x.start)}`:`${n} cierra a las ${hm(x.H.c)}: llegarías a las ${hm(x.start)} y no da tiempo a la visita (${fmtDur(s.dur)})`,s});
+    if(s.userAt!=null&&x.start>s.userAt+10){const pe=k?sch[k-1].end:D.start;P.push({t:`No llegas a ${n} a las ${hm(s.userAt)}: lo de antes acaba a las ${hm(pe)}${x.tr?` y hay ${x.tr} min de trayecto`:""}`,s});}
+    if(s.userAt==null&&(s.cat==="comida"||s.cat==="cena")&&s.fixedAt!=null&&x.start>s.fixedAt+60)P.push({t:`La ${s.cat} se iría hasta las ${hm(x.start)}`,s});
+    if(s.userAt==null&&s.cat==="atardecer"&&(s.sunset!=null?x.start>s.sunset-10:(s.fixedAt!=null&&x.start>s.fixedAt+25)))P.push({t:`Llegarías a ${n} con el sol ya puesto`,s});
+    if(s.label==="Excursión"&&s.fixedAt!=null&&x.start>s.fixedAt+20)P.push({t:`La excursión empezaría a las ${hm(x.start)}: se queda sin tiempo`,s});
+    if(s.item&&D.wd!=null&&s.cat!=="disco"){const c=closedOf(s.item.nm);if(c&&c.wds.includes(D.wd))P.push({t:`${n} cierra ${c.txt}`,s});}
+    if(s.item&&s.cat==="disco"&&D.wd!=null&&!clubOpen(s.item,D.wd,D.date))P.push({t:`${n} no suele abrir esa noche`,s});
+  });
+  return P;
+}
+function dayProblemTexts(T,D){return dayProblems(T,D).map(p=>p.t);}
+
+function snapDay(D){return {slots:D.slots.slice(),props:D.slots.map(s=>[s,{fixedAt:s.fixedAt,userAt:s.userAt,dur:s.dur}])};}
+function restoreDay(D,S){D.slots.length=0;D.slots.push(...S.slots);S.props.forEach(([s,p])=>Object.assign(s,p));}
+// aplica un cambio; si crea un problema que antes no estaba, lo deshace y devuelve el motivo
+function tryEdit(T,d,fn,keep,mode){
+  const D=T.days[d];if(!D)return {ok:false,why:"Ese día no existe."};
+  const S=snapDay(D),usedB=new Set(T.used),before=new Set(dayProblemTexts(T,D));
+  const undo=()=>{restoreDay(D,S);T.used.clear();usedB.forEach(x=>T.used.add(x));};
+  const r=fn(D);
+  if(r===false||typeof r==="string"){undo();return {ok:false,why:typeof r==="string"?r:"No se puede hacer ese cambio."};}
+  const fresh=()=>dayProblems(T,D).filter(p=>!before.has(p.t));
+  let nu=fresh();
+  const pre=mode==="add"?"No cabe ese día: ":"";
+  if(!nu.length){const res={ok:true,...(r||{})};if(mode==="dry")undo();return res;}
+  if(mode==="strict"){undo();return {ok:false,why:nu[0].t+". Si quieres hacerlo igualmente, quita antes alguna parada."};}
+  // reparar: si el día está lleno, se quita una visita ANTERIOR a la que llega tarde (es la que la retrasa) y que importe poco;
+  // nunca la que estás tocando ni las que añadiste tú
+  const first=nu[0].t,drops=[];
+  for(let k=0;k<3&&nu.length;k++){
+    const pi=D.slots.indexOf(nu[0].s);
+    const ok=s=>s!==keep&&!s.user&&REMOVABLE.has(s.cat)&&s.label!=="Excursión";
+    let cand=D.slots.filter((s,q)=>ok(s)&&(pi<0||q<pi));if(!cand.length)cand=D.slots.filter(ok);
+    if(!cand.length)break;
+    let best=null,bv=1e9;cand.forEach(s=>{const v=s.item?popOf(T,s.item):0;if(v<bv){bv=v;best=s;}});
+    D.slots.splice(D.slots.indexOf(best),1);drops.push(best);nu=fresh();
+  }
+  if(!nu.length){drops.forEach(s=>{if(s.item)T.used.delete(s.item.nm);});const res={ok:true,dropped:drops.map(slotName),...(r||{})};if(mode==="dry")undo();return res;}
+  undo();return {ok:false,why:pre+first};
+}
+function moveSlot(T,d,i,dir){
+  return tryEdit(T,d,D=>{const s=D.slots[i],j=i+dir;
+    if(!s)return false;
+    if(!EDIT_MOVABLE.has(s.cat)||s.label==="Excursión")return "Las comidas, el atardecer y la noche van a su hora: cambia su hora en lugar de moverlas.";
+    if(j<0||j>=D.slots.length)return "Ya está en el extremo del día.";
+    if(D.slots[j].label==="Excursión")return "No se puede pasar por encima de la excursión.";
+    [D.slots[i],D.slots[j]]=[D.slots[j],D.slots[i]];},D0slot(T,d,i),"strict");
+}
+// hora fija (at, en minutos) y/o duración; at===null devuelve la parada a su hora automática
+function setSlotTime(T,d,i,at,dur){
+  return tryEdit(T,d,D=>{const s=D.slots[i];if(!s)return false;
+    if(s.label==="Excursión"&&at!==undefined)return "La excursión ocupa el día entero: su hora no se cambia.";
+    if(!("fixedAt0" in s))s.fixedAt0=s.fixedAt;
+    if(at===null){s.userAt=undefined;s.fixedAt=s.fixedAt0;}
+    else if(at!=null){
+      s.userAt=at;s.fixedAt=at;
+      // se recoloca en el orden del día según su nueva hora
+      const rest=D.slots.filter(x=>x!==s),sch=runSchedule({...D,slots:rest},T);
+      D.slots.splice(D.slots.indexOf(s),1);
+      let k=D.slots.length;for(const x of sch){if(x.end>at){k=D.slots.indexOf(x.slot);break;}}
+      D.slots.splice(k,0,s);
+    }
+    if(dur)s.dur=Math.max(15,Math.min(600,dur));},D0slot(T,d,i));
+}
+function D0slot(T,d,i){const D=T.days[d];return D&&D.slots[i];}
+// añade una parada donde menos cuesta (menos trayecto, sin chocar con horarios); si no cabe en ningún hueco, no se añade
+function addSlot(T,d,slot,afterIdx,dry){
+  return tryEdit(T,d,D=>{
+    if(afterIdx!=null){D.slots.splice(afterIdx+1,0,slot);}
+    else{let best=-1,bp=1e18;
+      const ci=D.slots.findIndex(x=>x.cat==="cena"),maxK=slot.cat==="sight"&&ci>=0?ci:D.slots.length;
+      for(let k=Math.min(1,D.slots.length);k<=maxK;k++){
+        D.slots.splice(k,0,slot);const p=dayProblems(T,D).length*1e4+hoursPen(T,D);D.slots.splice(k,1);
+        if(p<bp){bp=p;best=k;}}
+      if(best<0)return false;D.slots.splice(best,0,slot);}
+    if(slot.item)T.used.add(slot.item.nm);
+    return {added:slot.item&&slot.item.nm};},slot,dry?"dry":"add");
+}
+// sitios sin usar cerca de lo que ya hay ese día (y abiertos ese día), para añadir con un toque
+function addCandidates(T,d,n){
+  const D=T.days[d];const cs=D.slots.map(s=>(s.item&&s.item.c)||s.at).filter(Boolean);const c0=cent(cs)||D.zoneC||T.P.center;if(!c0)return [];
+  return T.P.items.filter(a=>["sight","foto","compras","souvenir"].includes(a.cat)&&a.c&&!a.excursion&&!T.used.has(a.nm)&&!(D.wd!=null&&closedOf(a.nm)&&closedOf(a.nm).wds.includes(D.wd)))
+    .map(a=>({a,km:hav(a.c,c0)})).filter(x=>x.km<=2.5)
+    .sort((x,y)=>(fitOf(y.a,T.o.moods)+(y.a.imp||0)*2-y.km)-(fitOf(x.a,T.o.moods)+(x.a.imp||0)*2-x.km)).slice(0,14)
+    .map(x=>{const r=addSlot(T,d,{cat:x.a.cat,label:"Añadido",item:x.a,dur:x.a.dur||durOf(x.a),user:true},null,true);return {...x,fits:r.ok,dropped:r.dropped||[]};})
+    .filter(x=>x.fits).sort((x,y)=>x.dropped.length-y.dropped.length).slice(0,n||6);
+}
+// un sitio propio (buscado por nombre) convertido en parada
+function ownItem(T,nm,c,dur){
+  let name=nm.trim().replace(/[<>"`]/g,"").slice(0,80);if(!name)return null;
+  if(COORDS[name]&&hav(COORDS[name],c)>0.3)name+=` (${T.city})`;
+  COORDS[name]=c;
+  const it={cat:"sight",nm:name,c,d:"Lo has añadido tú.",q:name+" "+T.city,m:[],own:true,imp:0,el:null};
+  it.kind=kindOf(it);it.dur=dur||durOf(it);
+  return it;
+}
+// aplica una operación guardada (la misma que hizo el usuario) — sirve para editar y para reabrir el viaje
+function slotRef(D,s){if(!s)return null;if(s.item)return "i:"+s.item.nm;const same=D.slots.filter(x=>!x.item&&x.cat===s.cat);return "c:"+s.cat+":"+same.indexOf(s);}
+function refIdx(D,ref,fallback){if(!ref)return fallback;return D.slots.findIndex(s=>slotRef(D,s)===ref);}
+function applyEdit(T,e){
+  const D0=T.days[e.d];if(!D0)return {ok:false,why:"Ese día ya no existe."};
+  // las ediciones apuntan a su parada por nombre (no por posición): así sobreviven si el plan de base cambia un poco
+  if(e.ref!==undefined||e.afterRef!==undefined){e={...e};if(e.ref!==undefined){e.i=refIdx(D0,e.ref,e.i);if(e.i<0)return {ok:false,why:"Esa parada ya no está en el plan."};}
+    if(e.afterRef!==undefined){e.after=refIdx(D0,e.afterRef,e.after);if(e.after<0)e.after=undefined;}}
+  const D=D0;
+  if(e.op==="swap"||e.op==="del"){const s=D.slots[e.i];if(!s)return {ok:false};
+    if(e.op==="del"){const ok=removeSlot(T,e.d,s);if(ok&&s.item)T.used.delete(s.item.nm);return {ok};}
+    return {ok:swapSlot(T,e.d,s)};}
+  if(e.op==="move")return moveSlot(T,e.d,e.i,e.dir);
+  if(e.op==="time")return setSlotTime(T,e.d,e.i,e.at,e.dur);
+  if(e.op==="add"){const a=T.P.items.find(x=>x.nm===e.nm);if(!a||T.used.has(a.nm))return {ok:false,why:"Ese sitio ya está en tu viaje."};
+    return addSlot(T,e.d,{cat:a.cat==="sight"?"sight":a.cat,label:"Añadido",item:a,dur:a.dur||durOf(a),user:true},e.after);}
+  if(e.op==="own"){const it=ownItem(T,e.nm,e.c,e.dur);if(!it)return {ok:false};return addSlot(T,e.d,{cat:"sight",label:"Añadido",item:it,dur:it.dur,user:true},e.after);}
+  if(e.op==="pause")return addSlot(T,e.d,{cat:"pausa",label:"Tiempo libre",gen:{t:"Tiempo libre",d:"Un rato sin plan que has añadido tú: para descansar, volver al hotel o improvisar."},dur:e.dur||60,user:true},e.after);
+  return {ok:false};
+}
 // guía práctica del viaje: qué reservar ya, cómo moverse y las costumbres del sitio
 function tripGuide(T,plan){
   const books=[],seen=new Set();
@@ -5062,8 +5218,12 @@ document.getElementById("redo").onclick=()=>{document.getElementById("result").c
     const ritmo=(typeof sel!=="undefined"&&sel.ritmo)||"equi";
     if(typeof sel!=="undefined"){sel.moods=moods;sel.presupuesto=sel.presupuesto||"mid";}
     const opts={arr:tp.inTime||null,dep:tp.outTime||null,flightIn:tp.inNum||"",flightOut:tp.outNum||"",inDate:tp.inDate||"",presup:(typeof sel!=="undefined"&&sel.presupuesto)||"mid"};
-    const res=generar(destino,days,moods,ritmo,comp,opts);
-    ITIN={plan:res.plan,meta:res.meta,trip:res.trip,key:res.key,city:cap(destino),days,inDate:tp.inDate,hotelCoord:flowHotelCoord,cur:0};
+    const genArgs=[destino,days,moods,ritmo,comp,opts];
+    const res=generar(...genArgs);
+    ITIN={plan:res.plan,meta:res.meta,trip:res.trip,key:res.key,city:cap(destino),days,inDate:tp.inDate,hotelCoord:flowHotelCoord,cur:0,genArgs,edits:[],msg:null};
+    // viaje guardado con cambios: se vuelven a aplicar (el motor es determinista)
+    if(Array.isArray(tp.edits)&&tp.edits.length){let lost=0;tp.edits.forEach(e=>{if(applyEdit(res.trip,e).ok)ITIN.edits.push(e);else lost++;});tp.edits=null;redrawAllDays();
+      if(lost)ITIN.msg={day:0,bad:true,txt:`No he podido volver a aplicar ${lost} de tus ${lost+ITIN.edits.length} cambios: con el plan de hoy ya no caben o ese sitio ya no está. El resto sigue como lo dejaste.`};}
     ITIN.guide=tripGuide(res.trip,res.plan);
     $("itinCity").textContent=`Tu viaje a ${ITIN.city}`;
     const nights=Math.max(1,days-1);
@@ -5075,9 +5235,22 @@ document.getElementById("redo").onclick=()=>{document.getElementById("result").c
       bx.querySelector("button").onclick=()=>{if(!inp.value){inp.focus();return;}lastTrip=Object.assign({},lastTrip||{},{inDate:inp.value});const cur=ITIN.cur||0;generateItin();if(cur&&ITIN.plan[cur])renderItinDay(cur);if(typeof flash==="function")flash("Plan ajustado a tus fechas");};
       $("itinMeta").appendChild(bx);}
     transitPing();
+    paintAdjust();
     ITIN.events=null;loadEvents(ITIN.key,ITIN.inDate,days).then(ev=>{if(ITIN&&ITIN.key===res.key){ITIN.events=ev||[];renderEvents();}});
     paintDayList();
     renderItinDay(0);
+  }
+  function paintAdjust(){
+    let box=$("itinAdj");if(!box){box=document.createElement("details");box.id="itinAdj";box.className="itin-adj";const dl=$("dayList");dl.parentNode.insertBefore(box,dl);}
+    const r=(sel&&sel.ritmo)||"equi",ms=[...flowMoods];
+    box.innerHTML=`<summary>${ico("sliders")} Ajustar el viaje</summary><div class="adj-b"><span class="adj-l">Ritmo</span><div class="adj-c">${RITMO.map(x=>`<button type="button" data-r="${x.id}" class="${x.id===r?"on":""}">${x.nm}</button>`).join("")}</div>
+      <span class="adj-l">Moods <small>(hasta 3)</small></span><div class="adj-c adj-m">${MOODB.filter(m=>m.id!=="souvenir").map(m=>`<button type="button" data-m="${m.id}" class="${ms.includes(m.id)?"on":""}">${MOODNM[m.id]||m.nm}</button>`).join("")}</div>
+      <button type="button" class="adj-go">Rehacer el viaje</button><p class="dnote">Rehace todos los días con el nuevo ritmo y moods${ITIN&&ITIN.edits&&ITIN.edits.length?"; tus cambios a mano se perderían":""}.</p></div>`;
+    let pr=r,pm=new Set(ms);
+    box.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{pr=b.dataset.r;box.querySelectorAll("[data-r]").forEach(x=>x.classList.toggle("on",x===b));});
+    box.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{const m=b.dataset.m;if(pm.has(m)){if(pm.size>1)pm.delete(m);}else if(pm.size<3)pm.add(m);box.querySelectorAll("[data-m]").forEach(x=>x.classList.toggle("on",pm.has(x.dataset.m)));});
+    box.querySelector(".adj-go").onclick=()=>{const same=pr===r&&pm.size===ms.length&&ms.every(m=>pm.has(m));if(same){box.open=false;return;}
+      replanWith(()=>{if(sel)sel.ritmo=pr;flowMoods.clear();pm.forEach(m=>flowMoods.add(m));},"con "+(RITMO.find(x=>x.id===pr)||{}).nm.toLowerCase()+" y "+[...pm].map(m=>MOODNM[m]).join(" + "));};
   }
   function paintDayList(){
     const dl=$("dayList");dl.innerHTML="";
@@ -5110,7 +5283,7 @@ document.getElementById("redo").onclick=()=>{document.getElementById("result").c
   function stopChips(s,info){
     const a=s.a,out=[];
     if(a.price&&a.price.txt)out.push(`<span class="dchip${a.price.free?" free":""}">${ico("wallet")} ${a.price.txt}</span>`);
-    else if(a.real&&!a.auto&&info.price)out.push(`<span class="dchip">${ico("wallet")} ${info.price}</span>`);
+    else if(a.real&&!a.auto&&!a.own&&info.price)out.push(`<span class="dchip">${ico("wallet")} ${info.price}</span>`);
     if(a.dur&&!a.libre)out.push(`<span class="dchip">${ico("clock")} ${fmtDur(a.dur)}</span>`);
     if(a.book&&a.book[0]!=="opcional")out.push(`<span class="dchip warn" title="${a.book[1]}">${ico("ticket")} Reserva con ${a.book[0].replace(/\s*\(.*\)/,"")}</span>`);
     if(a.closed)out.push(`<span class="dchip${a.closed.today?" bad":""}">${ico("alert")} ${a.closed.today?"¡Cerrado ese día! Cámbialo":"Cierra "+a.closed.txt}</span>`);
@@ -5118,8 +5291,13 @@ document.getElementById("redo").onclick=()=>{document.getElementById("result").c
     if(a.club)out.push(`<span class="dchip${a.club.open===false?" bad":""}" title="${a.club.months?"Solo "+a.club.months:""}">${ico(a.club.open===false?"alert":"calendar")} ${a.club.open===false?"Esa noche no suele abrir":(a.club.open?"Abre esa noche":"Suele abrir "+a.club.txt)}</span>`);
     return out.join("");
   }
+  function stopActs(s){
+    const sl=s.slot;if(!sl)return "";const exc=sl.label==="Excursión",mov=EDIT_MOVABLE.has(sl.cat)&&!exc;
+    return `<div class="dacts">${mov?`<button class="dact" data-act="up" title="Adelantar" aria-label="Adelantar">${ico("arrow","r-up")}</button><button class="dact" data-act="down" title="Retrasar" aria-label="Retrasar">${ico("arrow","r-down")}</button>`:""}${exc?"":`<button class="dact" data-act="time" title="Cambiar la hora o lo que dura">${ico("clock")} Hora</button>`}${sl.cat!=="pausa"?`<button class="dact" data-act="swap" title="Cambiar por otra opción cercana">${ico("refresh")} Cambiar</button>`:""}<button class="dact" data-act="del" title="Quitar del plan" aria-label="Quitar">${ico("x")}</button></div>`;
+  }
   function renderItinDay(i){
     if(!ITIN)return;
+    if(ITIN.msg&&ITIN.msg.day!==i)ITIN.msg=null;
     ITIN.cur=i;
     $("scrItin").classList.remove("guide-on");
     markDayList(i);
@@ -5142,24 +5320,26 @@ document.getElementById("redo").onclick=()=>{document.getElementById("result").c
       const id=`di-${i}-${j}`;const cat=s.a.vcat||s.cat;
       if(s.a.libre){
         const row=document.createElement("div");row.className="dstop dfree";
-        row.innerHTML=`<div class="dt">${s.time}</div><div class="dmid"><div class="dn">${ico("coffee")} ${s.a.t} <span class="dto">hasta las ${s.end}</span></div><div class="dd">${s.a.d}</div></div><div></div>`;
+        row.innerHTML=`<div class="dt">${s.time}</div><div class="dmid"><div class="dn">${ico("coffee")} ${s.a.t} <span class="dto">hasta las ${s.end}</span></div><div class="dd">${s.a.d}</div>${s.slot?stopActs(s):""}</div><div></div>`;
+        if(s.slot)row.onclick=e=>{const b=e.target.closest(".dact");if(b){e.stopPropagation();editStop(i,s,b.dataset.act,b);}};
         tl.appendChild(row);return;
       }
       if(prevReal&&prevReal.a.real&&s.a.real&&typeof connector==="function"){const c=document.createElement("div");c.className="dconnwrap";c.innerHTML=connector(prevReal,s,ITIN.city,ITIN.key,ITIN.trip&&ITIN.trip.o);tl.appendChild(c);}
       prevReal=s;
       const info=(typeof getInfo==="function")?getInfo({cat,name:s.a.t,destino:ITIN.city,kind:s.a.kind}):{price:"€€"};
-      if(typeof stopData!=="undefined")stopData[id]={name:s.a.t,timeLabel:`${s.time}${s.end?" – "+s.end:""} · ${s.lb}`,desc:s.a.d,cat,real:s.a.real,destino:ITIN.city,img:null,kind:s.a.kind,dur:s.a.dur,price:s.a.price,book:s.a.book,closed:s.a.closed,near:s.a.near,auto:s.a.auto,gm:s.a.gm,hours:s.a.hours,club:s.a.club};
+      if(typeof stopData!=="undefined")stopData[id]={name:s.a.t,timeLabel:`${s.time}${s.end?" – "+s.end:""} · ${s.lb}`,desc:s.a.d,cat,real:s.a.real,destino:ITIN.city,img:null,kind:s.a.kind,dur:s.a.dur,price:s.a.price,book:s.a.book,closed:s.a.closed,near:s.a.near,auto:s.a.auto,gm:s.a.gm,hours:s.a.hours,club:s.a.club,own:s.a.own};
       let hotelChip="";
       if(ITIN.hotelCoord&&typeof COORDS!=="undefined"&&COORDS[s.a.t]){const km=hav(COORDS[s.a.t],ITIN.hotelCoord);const mn=km<0.3?"a un paso":"~"+Math.max(1,Math.round(km/4.8*60))+" min a pie";hotelChip=`<span class="dchip">${ico("bed")} ${mn} del hotel</span>`;}
       const row=document.createElement("div");row.className="dstop"+(s._n&&nPin>=2?" has-n":"")+(s.a.real?"":" dgen");row.dataset.id=id;
       // parada sin sitio concreto: se dice y se abre el mapa justo en esa zona (con reseñas reales)
       const gq=!s.a.real&&!s.a.marker?(s.a.gm||(GMQ[cat]?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(GMQ[cat]+" en "+ITIN.city)}`:"")):"";
       const near=s.a.near&&s.a.near.length?`<div class="dnear">${ico("pin")} Al lado, de paso: ${s.a.near.join(", ")}</div>`:"";
-      const acts=s.slot?`<div class="dacts"><button class="dact" data-act="swap" title="Cambiar por otra opción cercana">${ico("refresh")} Cambiar</button><button class="dact" data-act="del" title="Quitar del plan">${ico("x")}</button></div>`:"";
+      const acts=stopActs(s);
       row.innerHTML=`<div class="dt">${s.time}${s.end?`<small>${s.end}</small>`:""}</div><div class="dmid"><div class="dlb">${s.lb}</div><div class="dn">${s._n&&nPin>=2?`<span class="dnum">${s._n}</span>`:""}${s.a.t}</div>${s.a.d?`<div class="dd">${s.a.d}</div>`:""}${near}<div class="dmeta">${stopChips(s,info)}${gq?`<a class="dchip dgm" href="${gq}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${ico("pin")} Ver sitios en Google Maps ↗</a>`:""}${hotelChip}${s.a.real?`<span class="ddetail">${ico("search")} detalles</span>`:""}</div>${acts}</div><div class="dth" id="${id}"></div>`;
       row.onclick=e=>{
         const b=e.target.closest(".dact");
-        if(b){e.stopPropagation();editStop(i,s,b.dataset.act);return;}
+        if(b){e.stopPropagation();editStop(i,s,b.dataset.act,b);return;}
+        if(e.target.closest(".dedit"))return;
         if(typeof openModal==="function"&&s.a.real)openModal(id);
       };
       if(s._n){row.onmouseenter=()=>{if(dayM)dayM.highlight(id);};row.onmouseleave=()=>{if(dayM)dayM.highlight(null);};}
@@ -5167,21 +5347,92 @@ document.getElementById("redo").onclick=()=>{document.getElementById("result").c
       if(s.a.real)pend.push({id,a:s.a,cat:s.cat,destino:ITIN.city});
       else{const th=$(id);if(th){th.classList.add("dth-gen");th.innerHTML=ico({desayuno:"coffee",comida:"utensils",cena:"utensils",copas:"wine",disco:"music",merienda:"icecream",familia:"smile"}[s.cat]||"pin");}}
     });
+    if(ITIN.trip&&ITIN.trip.days[i])tl.appendChild(addPanel(i));
+    if(ITIN.msg&&ITIN.msg.day===i){const m=document.createElement("div");m.className="dmsg"+(ITIN.msg.bad?" bad":"");m.setAttribute("role","status");
+      m.innerHTML=`${ico(ITIN.msg.bad?"alert":"check")}<span>${esc(ITIN.msg.txt)}</span>${ITIN.msg.undo&&ITIN.edits.length?`<button type="button">Deshacer</button>`:""}`;
+      const ub=m.querySelector("button");if(ub)ub.onclick=()=>undoEdit();tl.prepend(m);}
     pend.forEach((p,idx)=>setTimeout(()=>{const el=$(p.id);if(el&&typeof loadThumb==="function")loadThumb(el,p.a,p.cat,p.destino,p.id);},idx*90));
     if(anok())anime({targets:"#itinTimeline .dstop",opacity:[0,1],translateX:[14,0],delay:anime.stagger(55),duration:480,easing:"easeOutCubic"});
     renderDayMap(stops);
     renderEvents();
   }
-  // cambiar o quitar una parada: se rehace el horario de ese día (horas, trayectos, rato libre) y su ficha
-  function editStop(i,s,act){
-    if(!ITIN||!ITIN.trip||!s.slot)return;
-    const T=ITIN.trip;
-    const ok=act==="swap"?swapSlot(T,i,s.slot):removeSlot(T,i,s.slot);
-    if(!ok){if(typeof flash==="function")flash(act==="swap"?"No hay otra opción cerca de este tipo":"No se ha podido quitar");return;}
-    if(act==="del"&&s.slot.item)T.used.delete(s.slot.item.nm);
-    const r=renderPlanDay(T,T.days[i]);ITIN.plan[i]=r.row;ITIN.meta[i]=r.meta;ITIN.guide=tripGuide(T,ITIN.plan);
-    const mm=document.querySelector("#scrItin .itin-main"),y=mm?mm.scrollTop:0;paintDayList();renderItinDay(i);if(mm)mm.scrollTop=y;
-    if(typeof flash==="function")flash(act==="swap"?"Parada cambiada: horario recalculado":"Parada quitada: horario recalculado");
+  // ===== Edición avanzada: cada cambio pasa por el validador del motor (applyEdit) y se puede deshacer =====
+  function redrawAllDays(){const T=ITIN.trip;T.days.forEach((D,d)=>{const r=renderPlanDay(T,D);ITIN.plan[d]=r.row;ITIN.meta[d]=r.meta;});ITIN.guide=tripGuide(T,ITIN.plan);}
+  function redrawDay(i,keepScroll){
+    const T=ITIN.trip;const r=renderPlanDay(T,T.days[i]);ITIN.plan[i]=r.row;ITIN.meta[i]=r.meta;ITIN.guide=tripGuide(T,ITIN.plan);
+    const mm=document.querySelector("#scrItin .itin-main"),y=mm?mm.scrollTop:0;paintDayList();renderItinDay(i);if(mm&&keepScroll!==false)mm.scrollTop=y;
+  }
+  // si el viaje ya está guardado, los cambios se guardan solos
+  function syncSavedEdits(){try{const a=loadSaved();const k=a.findIndex(x=>x.city===ITIN.city&&x.days===ITIN.days);if(k>=0){a[k].edits=ITIN.edits.slice();persistSaved(a);}}catch(e){}}
+  function runEdit(i,e,okMsg){
+    if(!ITIN||!ITIN.trip)return false;
+    const r=applyEdit(ITIN.trip,e);
+    if(!r.ok){ITIN.msg={day:i,bad:true,txt:r.why||"No se puede hacer ese cambio."};redrawDay(i);return false;}
+    ITIN.edits.push(e);syncSavedEdits();
+    ITIN.msg={day:i,txt:okMsg+(r.dropped&&r.dropped.length?` Para que todo quepa he quitado ${r.dropped.join(" y ")}.`:"")+" Horario recalculado.",undo:true};
+    redrawDay(i);return true;
+  }
+  function undoEdit(){
+    if(!ITIN||!ITIN.edits.length)return;
+    const ed=ITIN.edits.slice(0,-1),last=ITIN.edits[ITIN.edits.length-1];
+    const res=generar(...ITIN.genArgs);ITIN.trip=res.trip;ITIN.plan=res.plan;ITIN.meta=res.meta;ITIN.edits=[];
+    ed.forEach(e=>{if(applyEdit(res.trip,e).ok)ITIN.edits.push(e);});
+    redrawAllDays();syncSavedEdits();
+    ITIN.msg={day:ITIN.cur||0,txt:"Cambio deshecho."+(ITIN.edits.length?"":" Todo vuelve a estar como lo planificamos."),undo:ITIN.edits.length>0};
+    redrawDay(ITIN.cur||0);
+  }
+  window.moodtripUndo=undoEdit;
+  function slotIdx(i,s){return s&&s.slot?ITIN.trip.days[i].slots.indexOf(s.slot):-1;}
+  function editStop(i,s,act,btn){
+    const k=slotIdx(i,s);if(k<0)return;const ref=slotRef(ITIN.trip.days[i],s.slot);
+    if(act==="swap")return runEdit(i,{d:i,op:"swap",i:k,ref},"Parada cambiada.");
+    if(act==="del")return runEdit(i,{d:i,op:"del",i:k,ref},"Parada quitada.");
+    if(act==="up"||act==="down")return runEdit(i,{d:i,op:"move",i:k,ref,dir:act==="up"?-1:1},act==="up"?"Parada adelantada.":"Parada retrasada.");
+    if(act==="time"){
+      const row=btn.closest(".dstop");const ex=row.querySelector(".dedit");if(ex){ex.remove();return;}
+      const sl=s.slot,cur=toMin(s.time),durs=[15,30,45,60,75,90,105,120,150,180,210,240,300];
+      if(!durs.includes(sl.dur))durs.push(sl.dur);durs.sort((a,b)=>a-b);
+      const f=document.createElement("div");f.className="dedit";
+      f.innerHTML=`<label>Empieza a las <input type="time" value="${s.time}" step="300"></label><label>Dura <select>${durs.map(d=>`<option value="${d}"${d===sl.dur?" selected":""}>${fmtDur(d)}</option>`).join("")}</select></label><button type="button" class="dok">Aplicar</button>${sl.userAt!=null?`<button type="button" class="dauto">Hora automática</button>`:""}<span class="dnote">Si no cabe, te digo por qué y no se cambia nada.</span>`;
+      f.onclick=ev=>ev.stopPropagation();
+      f.querySelector(".dok").onclick=()=>{
+        const v=f.querySelector("input").value,dur=+f.querySelector("select").value;
+        let at=v?tmin(v):null;if(at!=null&&at<360&&cur>=1080)at+=1440; // las 00:30 de una noche son de madrugada
+        const e={d:i,op:"time",i:k,ref};if(dur!==sl.dur)e.dur=dur;if(at!=null&&v!==s.time)e.at=at;
+        if(e.at===undefined&&e.dur===undefined){f.remove();return;}
+        runEdit(i,e,"Hora cambiada.");};
+      const au=f.querySelector(".dauto");if(au)au.onclick=()=>runEdit(i,{d:i,op:"time",i:k,ref,at:null},"Vuelve a su hora automática.");
+      btn.closest(".dmid").appendChild(f);f.querySelector("input").focus();
+    }
+  }
+  // bloque «Añadir al día»: sitios cercanos que caben de verdad, un sitio tuyo o tiempo libre
+  function addPanel(i){
+    const T=ITIN.trip,D=T.days[i];const box=document.createElement("section");box.className="dadd";
+    const cands=addCandidates(T,i,5);
+    const after=D.slots.map((sl,k)=>({k,sl})).filter(x=>x.sl.cat!=="disco");
+    const durOpt=(def)=>[30,45,60,90,120].map(d=>`<option value="${d}"${d===def?" selected":""}>${fmtDur(d)}</option>`).join("");
+    box.innerHTML=`<h3>${ico("plus")} Añadir al día</h3>
+      <div class="dadd-sec"><b>Cerca de lo que ya tienes</b>${cands.length?`<ul class="dadd-l">${cands.map((c,n)=>`<li><span><b>${esc(shortNm(c.a.nm))}</b> · ${c.km<0.3?"al lado":c.km.toFixed(1).replace(".",",")+" km"} · ${fmtDur(c.a.dur||60)}${c.dropped.length?` <em>(para que quepa quitaría ${esc(c.dropped.join(" y "))})</em>`:""}</span><button type="button" data-n="${n}">Añadir</button></li>`).join("")}</ul>`:`<p class="dnote">Hoy no cabe nada más cerca: quita una parada o añade tiempo libre.</p>`}</div>
+      <div class="dadd-sec"><b>Un sitio tuyo</b><div class="dadd-r"><input type="text" class="dadd-q" placeholder="Nombre del sitio: una tienda, un bar, un museo…" maxlength="80"><select class="dadd-dur">${durOpt(60)}</select><button type="button" class="dadd-own">Buscar y añadir</button></div><p class="dnote">Lo busco en OpenStreetMap dentro de ${esc(ITIN.city)} y lo coloco donde menos trayecto suma.</p></div>
+      <div class="dadd-sec"><b>Tiempo libre</b><div class="dadd-r"><select class="dadd-pd">${durOpt(60)}</select><select class="dadd-after">${after.map(x=>`<option value="${x.k}">después de ${esc(slotName(x.sl))}</option>`).join("")}</select><button type="button" class="dadd-pause">Añadir</button></div></div>`;
+    box.querySelectorAll(".dadd-l button").forEach(b=>b.onclick=()=>{const c=cands[+b.dataset.n];runEdit(i,{d:i,op:"add",nm:c.a.nm},`${shortNm(c.a.nm)} añadido.`);});
+    box.querySelector(".dadd-pause").onclick=()=>{const af=+box.querySelector(".dadd-after").value;runEdit(i,{d:i,op:"pause",after:af,afterRef:slotRef(D,D.slots[af]),dur:+box.querySelector(".dadd-pd").value},"Tiempo libre añadido.");};
+    const own=box.querySelector(".dadd-own"),qi=box.querySelector(".dadd-q");
+    qi.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();own.click();}});
+    own.onclick=async()=>{
+      const q=qi.value.trim().replace(/[<>"`]/g,"");if(!q)return;own.disabled=true;own.textContent="Buscando…";
+      const c=await geocode(q+", "+ITIN.city);own.disabled=false;own.textContent="Buscar y añadir";
+      const cc=T.P.center;
+      if(!c){ITIN.msg={day:i,bad:true,txt:`No encuentro «${q}» en ${ITIN.city}. Prueba con el nombre exacto o añade la calle.`};redrawDay(i);return;}
+      if(cc&&hav(c,cc)>40){ITIN.msg={day:i,bad:true,txt:`«${q}» sale a ${Math.round(hav(c,cc))} km de ${ITIN.city}: no parece el sitio que buscas.`};redrawDay(i);return;}
+      runEdit(i,{d:i,op:"own",nm:q,c:[+(+c[0]).toFixed(5),+(+c[1]).toFixed(5)],dur:+box.querySelector(".dadd-dur").value},`${q} añadido.`);};
+    return box;
+  }
+  // ritmo y moods desde el propio itinerario (rehace el viaje; si hay cambios tuyos, se pide confirmar)
+  let replanArm=null;
+  function replanWith(fn,label){
+    if(ITIN.edits.length&&replanArm!==label){replanArm=label;ITIN.msg={day:ITIN.cur||0,bad:true,txt:`Rehacer el viaje ${label} borra tus ${ITIN.edits.length} ${ITIN.edits.length===1?"cambio":"cambios"}. Pulsa otra vez para confirmar.`};redrawDay(ITIN.cur||0);return;}
+    replanArm=null;fn();const cur=ITIN.cur||0;generateItin();if(ITIN.plan[cur])renderItinDay(cur);if(typeof flash==="function")flash("Viaje rehecho "+label);
   }
   // ===== Antes de ir: lo que hay que saber y reservar, explicado =====
   function guideChecks(){try{return JSON.parse(localStorage.getItem("em_chk_"+norm(ITIN.city))||"{}");}catch(e){return{};}}
@@ -5532,7 +5783,8 @@ document.getElementById("redo").onclick=()=>{document.getElementById("result").c
       return;
     }
     const b=estBudget(),mid=r=>Math.round((r[0]+r[1])/2/10)*10;
-    const t={city:ITIN.city,key:ITIN.key||null,days:ITIN.days,nights:b.n,total:mid(b.fl)+mid(b.al)+mid(b.ex),inDate:(lastTrip&&lastTrip.inDate)||"",moods:[...flowMoods],saved:Date.now()};
+    const t={city:ITIN.city,key:ITIN.key||null,days:ITIN.days,nights:b.n,total:mid(b.fl)+mid(b.al)+mid(b.ex),inDate:(lastTrip&&lastTrip.inDate)||"",moods:[...flowMoods],
+      compania:(sel&&sel.compania)||"amigos",ritmo:(sel&&sel.ritmo)||"equi",presupuesto:(sel&&sel.presupuesto)||"mid",edits:(ITIN.edits||[]).slice(),saved:Date.now()};
     const a=loadSaved();const i=a.findIndex(x=>x.city===t.city&&x.days===t.days);
     if(i>=0)a[i]=t;else a.unshift(t);
     persistSaved(a);
@@ -5557,8 +5809,9 @@ document.getElementById("redo").onclick=()=>{document.getElementById("result").c
       el.querySelector(".theart").onclick=e=>{e.stopPropagation();persistSaved(loadSaved().filter(x=>!(x.city===t.city&&x.days===t.days)));renderSaved();if(typeof flash==="function")flash("Viaje eliminado");};
       el.onclick=()=>{
         inDest.value=t.city;delete inDest.dataset.key;
-        lastTrip={dest:t.city,days:t.days,inNum:"",inDate:t.inDate||"",inTime:"",outNum:"",outDate:"",outTime:""};
+        lastTrip={dest:t.city,days:t.days,inNum:"",inDate:t.inDate||"",inTime:"",outNum:"",outDate:"",outTime:"",edits:t.edits||[]};
         flowMoods.clear();(t.moods||[]).forEach(m=>flowMoods.add(m));
+        if(typeof sel!=="undefined"){if(t.compania)sel.compania=t.compania;if(t.ritmo)sel.ritmo=t.ritmo;if(t.presupuesto)sel.presupuesto=t.presupuesto;}
         ensureCity(t.city).catch(()=>null).then(()=>{generateItin();showScr("scrItin");window.scrollTo({top:0});setTimeout(refreshDayMap,120);});
       };
       list.appendChild(el);

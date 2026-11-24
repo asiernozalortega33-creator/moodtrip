@@ -7,7 +7,7 @@ const { spawn } = require("child_process");
 const path = require("path"), fs = require("fs");
 const puppeteer = require("puppeteer-core");
 const CHROME = process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe";
-const files = process.argv.slice(2).length ? process.argv.slice(2) : ["humo-ciudades.js", "nombres-duplicados.js", "horarios-discotecas.js", "cuestas.js", "perfiles-af.js"];
+const files = process.argv.slice(2).length ? process.argv.slice(2) : ["humo-ciudades.js", "nombres-duplicados.js", "horarios-discotecas.js", "cuestas.js", "edicion.js", "perfiles-af.js"];
 (async () => {
   const srv = spawn(process.execPath, [path.join(__dirname, "dev-server.js"), "8799"], { stdio: "ignore" });
   await new Promise(r => setTimeout(r, 800));

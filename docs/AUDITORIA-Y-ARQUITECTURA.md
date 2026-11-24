@@ -49,7 +49,7 @@ se añade un LLM, debería ocupar solo la capa de explicar y personalizar textos
 - No había pruebas en el repositorio. Ahora están en `tests/` (sección 6).
 
 **Experiencia de usuario**
-- Faltan: reordenar paradas, añadir un sitio propio y cambiar la hora de una parada a mano. Hoy solo existen «Cambiar» y «Quitar», que sí recalculan el día.
+- **Edición avanzada (hecha, 24-11-2026, ver sección 3 bis).**
 - «Cambiar» no actualiza los textos de alrededor («Desayuna cerca de…»).
 
 ## 3. Arquitectura de motores (lo que existe y dónde)
@@ -76,6 +76,26 @@ altitud (`el`), duración, precio honesto (`priceOf`: gratis / rango aproximado 
 meses), origen (curado o automático), fotos y motivo («Por qué hoy es así»). Los trayectos se calculan
 entre paradas (`connector`). **Pendiente:** convertir los trayectos en entidades propias, guardadas con su
 ruta, y tipar el esquema.
+
+## 3 bis. Edición avanzada del itinerario
+
+Cada parada tiene ↑ ↓ (mover), «Hora» (hora de inicio y duración), «Cambiar» y ✕, y al final de cada día hay un bloque
+«Añadir al día»: sitios cercanos que **caben de verdad** (se prueban antes de ofrecerlos), un sitio tuyo (se busca en
+OpenStreetMap dentro de la ciudad) y tiempo libre. En la barra lateral, «Ajustar el viaje» cambia ritmo y moods y rehace
+el viaje (si hay cambios a mano, pide confirmar porque se perderían).
+
+- **Validador (`dayProblems`)**: detecta visitas fuera de horario o en día de cierre, una parada que ya no cabe (antes del
+  vuelo o del final del día), una hora fijada a la que no llegas, la comida o la cena desplazadas más de una hora, el
+  atardecer con el sol ya puesto, una excursión que empieza tarde y una discoteca en una noche en que no abre.
+- **`tryEdit`**: aplica el cambio; si crea un problema nuevo, intenta **reparar** quitando la visita anterior que menos
+  importa (nunca la que tocas ni las que añadiste tú) y lo dice («Para que todo quepa he quitado…»); si no hay arreglo,
+  lo deshace y explica el motivo. **Mover** nunca quita nada: si no cabe, se rechaza con el motivo.
+- Todo se puede **deshacer** (se rehace el plan y se vuelven a aplicar los cambios anteriores).
+- Los cambios se guardan como lista de operaciones que apuntan a su parada **por nombre**, no por posición. Al reabrir
+  un viaje guardado se reaplican; si alguno ya no cabe, se avisa. Los viajes guardados conservan también compañía,
+  ritmo y presupuesto (antes se perdían y al reabrir podía salir otro plan).
+- Un sitio añadido por ti no lleva precio inventado: la ficha dice que no lo sabemos.
+- Pruebas: `tests/edicion.js` (12 casos: lo que debe salir bien y lo que debe rechazarse con motivo, más la reapertura idéntica).
 
 ## 4. Transporte con líneas reales (Transitous)
 
@@ -141,7 +161,7 @@ Otras: `humo-ciudades.js` (68 viajes en 34 ciudades, 0 errores), `horarios-disco
 ## 7. Lo que falta, por prioridad
 
 1. Vigilar el volumen de rutas (Transitous pide hablar con ellos por encima de ~720 al día) y, si crece, cachear por tramo más tiempo o montar un OpenTripPlanner propio.
-2. **Edición avanzada:** reordenar paradas, añadir un sitio propio, cambiar horas, con recálculo y validación.
+2. Edición: arrastrar paradas entre días y que «Cambiar» reescriba los textos vecinos.
 3. **Presupuesto real por plan:** sumar las paradas del itinerario (entradas y comidas), separar lo confirmado, lo estimado y lo pendiente, y proponer alternativas baratas equivalentes.
 4. **Naturaleza y montaña** en la guía automática: picos, rutas, telecabinas y refugios. OpenStreetMap vía Overpass está bloqueado (406), así que haría falta otra vía o curar destinos de montaña.
 5. **Validador antes de enseñar el plan** (las comprobaciones de `tests/` dentro de la app) y fiabilidad por dato en la ficha.
