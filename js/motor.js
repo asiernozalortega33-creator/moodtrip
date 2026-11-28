@@ -393,7 +393,11 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   if(window.moodtripUseLegs)window.moodtripUseLegs({[b.dataset.k]:+b.dataset.min});},true);
 
 /* ============ GENERADOR (días completos) ============ */
-function cap(s){return s.trim().replace(/(^|\s)(\p{L})/gu,(a,b,c)=>b+c.toUpperCase());}
+// «palma de mallorca» → «Palma de Mallorca» (las partículas en minúscula, salvo al principio)
+const CAP_LOW=new Set(["de","del","la","las","los","el","y","e","en","di","da","do","dos","das","sur","am","an","im"]);
+function cap(s){return s.trim().split(/(\s+)/).map((w,i)=>i>0&&CAP_LOW.has(w.toLowerCase())?w.toLowerCase():w.replace(/^(\p{L})/u,c=>c.toUpperCase())).join("");}
+// el mismo sitio con otro nombre (el Harder Kulm y su pasarela): no se repite el mismo día
+function sameSpot(a,b){if(!a||!b)return false;const x=norm(shortNm(a.nm)),y=norm(shortNm(b.nm));return x.includes(y)||y.includes(x)||norm(a.nm).includes(y)||norm(b.nm).includes(x);}
 function resolveKey(destino){const ex=inDest.dataset.key;if(ex&&DB[ex])return ex;const n=norm(destino);if(DB[n])return n;if(ALIAS[n]&&DB[ALIAS[n]])return ALIAS[n];const f=DESTINOS.find(d=>norm(d.n)===n&&d.key);if(f)return f.key;for(const a in ALIAS){if(n.includes(a)&&DB[ALIAS[a]])return ALIAS[a];}return null;}
 
 function poolDe(key){let pool=key&&DB[key]?DB[key].slice():null;if(pool&&EXTRAS[key])pool=pool.concat(EXTRAS[key]);if(pool&&AUX[key])pool=pool.concat(AUX[key]);return pool;}
@@ -520,8 +524,8 @@ function departureMarker(time,destino,num){
    Solo se guardan los que suben o bajan 20 m o más; el resto cuenta como llano. ELEV0 = altitud de la parte baja
    (la mediana de los sitios de la guía), para pasar a relativa la altitud que trae la guía automática. */
 /*ELEV-DATA*/
-const ELEV0={"budapest":117,"split":17,"seoul":35,"lisboa":39,"praga":205,"roma":35,"amsterdam":7,"berlin":38,"paris":50,"madrid":655,"londres":22,"atenas":81,"viena":190,"dublin":15,"copenhague":7,"estambul":52,"edimburgo":80,"florencia":63,"venecia":10,"oporto":84,"cracovia":217,"estocolmo":19,"bruselas":30,"sevilla":15,"munich":524,"niza":20,"milan":132,"barcelona":24,"granada":702,"valencia":23,"malaga":21,"bilbao":19,"napoles":45,"tokio":25};
-const ELEV={"Parlamento de Budapest":-20,"Bastión de los Pescadores":55,"Iglesia de Matías":60,"Castillo de Buda":45,"Baños Rudas (terma turca)":65,"Cuevas de Pálvölgyi":175,"Colina Gellért y Citadella":105,"Crucero al atardecer por el Danubio":-20,"Colina Marjan":85,"Excursión a las cascadas de Krka":125,"Dvor":35,"Bukchon Hanok Village":30,"Changdeokgung y Jardín Secreto":20,"Torre N de Seúl (Namsan)":235,"Senderismo en Bukhansan":745,"Spa coreano (jjimjilbang)":-25,"Río Han en Banpo":-30,"Atardecer en Namsan":235,"Muralla de Naksan":40,"Barbacoa coreana (Maple Tree House)":60,"Pojangmacha de Hongdae":-20,"Bares de Hongdae":-20,"Octagon (Gangnam)":-25,"Cakeshop (Itaewon)":25,"Pastéis de Belém":-25,"Torre de Belém":-40,"Monasterio de los Jerónimos":-30,"Castillo de San Jorge":40,"Plaza del Comercio":-30,"LX Factory":-35,"Oceanário de Lisboa":-40,"Excursión a Sintra":425,"Time Out Market":-30,"Miradouro da Senhora do Monte":35,"Miradouro de Santa Catarina":20,"Miradouro de São Pedro de Alcântara":20,"Pink Street (Cais do Sodré)":-30,"Pensão Amor":-25,"Bairro Alto de bares":35,"Musicbox (Cais do Sodré)":-35,"Ministerium Club":-30,"Puente de Carlos al amanecer":-20,"Castillo de Praga y San Vito":45,"Colina y torre de Petřín":120,"Vyšehrad":30,"Cervecería-jardín de Letná":30,"Crucero por el Moldava":-20,"Karlovy Lázně":-20,"Pasticcería Regoli (maritozzo)":20,"Galería Borghese":30,"Castel Sant'Angelo":-20,"Goa Club":-20,"Klunkerkranich":20,"Prater Garten":20,"Museo del Louvre":20,"Museo de Orsay":-20,"Montmartre y Sacré-Cœur":80,"Excursión a Versalles":95,"Bouillon Pigalle":20,"La Machine du Moulin Rouge":25,"Palacio Real de Madrid":-25,"Estadio Santiago Bernabéu":60,"Barrio de Malasaña":20,"Sidrería Casa Mingo":-70,"Bares de Malasaña":20,"London Eye":-20,"Tower Bridge":-20,"Sky Garden":20,"Primrose Hill":35,"Desayuno griego (yogur y miel)":25,"Acrópolis y Partenón":55,"Plaka":25,"Colina Licabeto":85,"Excursión a Cabo Sunión":-25,"Mezze en una taverna":25,"Colina Filopappos":35,"Bares de Gazi":-40,"Bolivar Beach Bar":-65,"Noria del Prater":-25,"Crucero por el Danubio":-20,"Kahlenberg":215,"Heuriger en Grinzing":45,"Pratersauna":-25,"Phoenix Park":25,"Café turco (Mandabatmaz)":30,"Bazar de las Especias":-35,"Kebab / döner":30,"Balık ekmek (Eminönü)":-50,"Mezze en Kadıköy":-40,"Crucero por el Bósforo":-40,"Kebab house":20,"Bares de Karaköy / Beyoğlu":-25,"Rooftop bar (360 Istanbul)":30,"Sortie (Bósforo)":-50,"Scottish breakfast":-20,"The Milkman (café)":-25,"The Edinburgh Larder":-25,"Palacio de Holyrood":-40,"Dean Village":-40,"Excursión a las Highlands":135,"Arthur's Seat":125,"Camera Obscura":25,"The Witchery":25,"The Bow Bar (whisky)":20,"Panda & Sons":-20,"Ponte Vecchio":-25,"Piazzale Michelangelo":35,"Ponte Vecchio al atardecer":-25,"Tenax":-20,"Estación de São Bento":-25,"Ribeira":-65,"Puente Don Luís I":-85,"Bodegas de Oporto (Gaia)":-80,"Palacio de la Bolsa":-50,"Jardim do Morro":-85,"Crucero por el Duero":-70,"Puente Don Luís I al atardecer":-85,"Bodega de vino de Oporto (cata)":-85,"Gare Porto":45,"Excursión a Auschwitz-Birkenau":25,"Minas de sal de Wieliczka":30,"Montículo de Kościuszko":85,"Fotografiska":-20,"Excursión por el archipiélago":35,"Café Belga":35,"Atomium":20,"Museo Magritte":30,"Parque del Cincuentenario":50,"Frites (Maison Antoine)":25,"Place du Grand Sablon":25,"Atomium iluminado":20,"Excursión a Neuschwanstein":420,"Colina del Castillo":25,"Museo Matisse":95,"Museo Marc Chagall":20,"Èze y su jardín exótico":385,"High Club":-20,"Le Glam":35,"Beach club de verano (Castel Plage)":-20,"Fondazione Prada":-20,"Magazzini Generali":-20,"Park Güell":150,"Casa Batlló":20,"La Pedrera (Casa Milà)":30,"MNAC y escalinata de Montjuïc":40,"Fundació Joan Miró":45,"Castell de Montjuïc":155,"Playa de la Barceloneta":-20,"Recinte Modernista de Sant Pau":35,"Barrio de Gràcia":50,"CosmoCaixa":150,"Tibidabo":480,"Excursión a Montserrat":705,"Cervecería Catalana":25,"La Bodegueta (Rambla de Catalunya)":30,"Bar Mut":35,"La Pepita (Gràcia)":35,"Bunkers del Carmel":205,"Mirador del Alcalde (Montjuïc)":100,"Plaça del Sol (Gràcia)":45,"Dry Martini":35,"Razzmatazz":-20,"Passeig de Gràcia":20,"Alhambra y Generalife":75,"Albaicín":70,"Carrera del Darro y Paseo de los Tristes":20,"Sacromonte y sus cuevas":70,"Monasterio de la Cartuja":35,"Parque de las Ciencias":-40,"Bar Poë":-20,"Taberna La Tana":-20,"Carmen de Aben Humeya":45,"El Trillo":65,"Mirador de San Nicolás":70,"Mirador de San Cristóbal":55,"Mirador de San Miguel Alto":115,"Peña La Platería (flamenco)":65,"Cerámica de Fajalauza en el Albaicín":40,"Puente de Cabrera y la Alhambra":20,"El Cabanyal":-20,"Playa de la Malvarrosa":-25,"Excursión a la Albufera y El Palmar":-20,"Casa Carmela":-20,"La Pepica":-20,"Bodega La Pascuala":-20,"Casa Montaña":-20,"Ciudad de las Artes al atardecer":-20,"La Fábrica de Hielo (Cabanyal)":-20,"Puente de l'Assut de l'Or":-20,"Castillo de Gibralfaro":75,"Muelle Uno y Palmeral de las Sorpresas":-20,"Jardín Botánico de la Concepción":75,"Excursión al Caminito del Rey":270,"José Carlos García":-20,"Mirador de Gibralfaro":100,"La Farola y el Muelle Uno":-20,"Museo Guggenheim Bilbao":-20,"Basílica de Begoña":70,"Puente Zubizuri":-20,"Excursión al Puente Bizkaia":-20,"Sorginzulo":70,"Nerua":-20,"Mirador de Artxanda":115,"Parque Etxebarria":40,"Back&Stage":-20,"Castel Nuovo":-30,"Castel dell'Ovo":-40,"Castel Sant'Elmo y la Certosa":200,"Museo de Capodimonte":110,"Quartieri Spagnoli y el mural de Maradona":30,"Catacumbas de San Gennaro":70,"Excursión a Pompeya":-35,"Excursión al Vesubio":975,"Excursión a Capri":405,"L'Antica Pizzeria da Michele":-20,"Pizzeria Starita":45,"50 Kalò":-30,"Mimì alla Ferrovia":-20,"Borgo Marinari al atardecer":-45,"Belvedere de San Martino":175,"L'Antiquario":-30,"Baretti de Chiaia":-20,"Santuario Meiji":20,"teamLab Planets":-20,"Tokyo Skytree":-20,"Shimokitazawa":20,"Jardín Hama-rikyu":-20,"Excursión a Nikko":645,"Omoide Yokocho":25,"Tempura Tsunahachi (Shinjuku)":30,"Odaiba al atardecer (Rainbow Bridge)":-25,"Bar Benfiddich":30};
+const ELEV0={"budapest":117,"split":17,"seoul":35,"lisboa":39,"praga":205,"roma":35,"amsterdam":7,"berlin":38,"paris":49,"madrid":655,"londres":22,"atenas":81,"viena":190,"dublin":15,"copenhague":7,"estambul":52,"edimburgo":80,"florencia":63,"venecia":10,"oporto":84,"cracovia":217,"estocolmo":19,"bruselas":30,"sevilla":15,"munich":524,"niza":20,"milan":132,"barcelona":24,"granada":702,"valencia":23,"malaga":21,"bilbao":19,"napoles":45,"tokio":23,"palma":21,"chamonix":1042,"interlaken":639,"santorini":129};
+const ELEV={"Parlamento de Budapest":-20,"Bastión de los Pescadores":55,"Iglesia de Matías":60,"Castillo de Buda":45,"Baños Rudas (terma turca)":65,"Cuevas de Pálvölgyi":175,"Colina Gellért y Citadella":105,"Crucero al atardecer por el Danubio":-20,"Colina Marjan":85,"Excursión a las cascadas de Krka":125,"Dvor":35,"Bukchon Hanok Village":30,"Changdeokgung y Jardín Secreto":20,"Torre N de Seúl (Namsan)":235,"Senderismo en Bukhansan":745,"Spa coreano (jjimjilbang)":-25,"Río Han en Banpo":-30,"Atardecer en Namsan":235,"Muralla de Naksan":40,"Barbacoa coreana (Maple Tree House)":60,"Pojangmacha de Hongdae":-20,"Bares de Hongdae":-20,"Octagon (Gangnam)":-25,"Cakeshop (Itaewon)":25,"Pastéis de Belém":-25,"Torre de Belém":-40,"Monasterio de los Jerónimos":-30,"Castillo de San Jorge":40,"Plaza del Comercio":-30,"LX Factory":-35,"Oceanário de Lisboa":-40,"Excursión a Sintra":425,"Time Out Market":-30,"Miradouro da Senhora do Monte":35,"Miradouro de Santa Catarina":20,"Miradouro de São Pedro de Alcântara":20,"Pink Street (Cais do Sodré)":-30,"Pensão Amor":-25,"Bairro Alto de bares":35,"Musicbox (Cais do Sodré)":-35,"Ministerium Club":-30,"Puente de Carlos al amanecer":-20,"Castillo de Praga y San Vito":45,"Colina y torre de Petřín":120,"Vyšehrad":30,"Cervecería-jardín de Letná":30,"Crucero por el Moldava":-20,"Karlovy Lázně":-20,"Pasticcería Regoli (maritozzo)":20,"Galería Borghese":30,"Castel Sant'Angelo":-20,"Goa Club":-20,"Klunkerkranich":20,"Prater Garten":20,"Museo del Louvre":20,"Montmartre y Sacré-Cœur":80,"Excursión a Versalles":95,"Bouillon Pigalle":20,"La Machine du Moulin Rouge":25,"Palacio Real de Madrid":-25,"Estadio Santiago Bernabéu":60,"Barrio de Malasaña":20,"Sidrería Casa Mingo":-70,"Bares de Malasaña":20,"London Eye":-20,"Tower Bridge":-20,"Sky Garden":20,"Primrose Hill":35,"Desayuno griego (yogur y miel)":25,"Acrópolis y Partenón":55,"Plaka":25,"Colina Licabeto":85,"Excursión a Cabo Sunión":-25,"Mezze en una taverna":25,"Colina Filopappos":35,"Bares de Gazi":-40,"Bolivar Beach Bar":-65,"Noria del Prater":-25,"Crucero por el Danubio":-20,"Kahlenberg":215,"Heuriger en Grinzing":45,"Pratersauna":-25,"Phoenix Park":25,"Café turco (Mandabatmaz)":30,"Bazar de las Especias":-35,"Kebab / döner":30,"Balık ekmek (Eminönü)":-50,"Mezze en Kadıköy":-40,"Crucero por el Bósforo":-40,"Kebab house":20,"Bares de Karaköy / Beyoğlu":-25,"Rooftop bar (360 Istanbul)":30,"Sortie (Bósforo)":-50,"Scottish breakfast":-20,"The Milkman (café)":-25,"The Edinburgh Larder":-25,"Palacio de Holyrood":-40,"Dean Village":-40,"Excursión a las Highlands":135,"Arthur's Seat":125,"Camera Obscura":25,"The Witchery":25,"The Bow Bar (whisky)":20,"Panda & Sons":-20,"Ponte Vecchio":-25,"Piazzale Michelangelo":35,"Ponte Vecchio al atardecer":-25,"Tenax":-20,"Estación de São Bento":-25,"Ribeira":-65,"Puente Don Luís I":-85,"Bodegas de Oporto (Gaia)":-80,"Palacio de la Bolsa":-50,"Jardim do Morro":-85,"Crucero por el Duero":-70,"Puente Don Luís I al atardecer":-85,"Bodega de vino de Oporto (cata)":-85,"Gare Porto":45,"Excursión a Auschwitz-Birkenau":25,"Minas de sal de Wieliczka":30,"Montículo de Kościuszko":85,"Fotografiska":-20,"Excursión por el archipiélago":35,"Café Belga":35,"Atomium":20,"Museo Magritte":30,"Parque del Cincuentenario":50,"Frites (Maison Antoine)":25,"Place du Grand Sablon":25,"Atomium iluminado":20,"Excursión a Neuschwanstein":420,"Colina del Castillo":25,"Museo Matisse":95,"Museo Marc Chagall":20,"Èze y su jardín exótico":385,"High Club":-20,"Le Glam":35,"Beach club de verano (Castel Plage)":-20,"Fondazione Prada":-20,"Magazzini Generali":-20,"Park Güell":150,"Casa Batlló":20,"La Pedrera (Casa Milà)":30,"MNAC y escalinata de Montjuïc":40,"Fundació Joan Miró":45,"Castell de Montjuïc":155,"Playa de la Barceloneta":-20,"Recinte Modernista de Sant Pau":35,"Barrio de Gràcia":50,"CosmoCaixa":150,"Tibidabo":480,"Excursión a Montserrat":705,"Cervecería Catalana":25,"La Bodegueta (Rambla de Catalunya)":30,"Bar Mut":35,"La Pepita (Gràcia)":35,"Bunkers del Carmel":205,"Mirador del Alcalde (Montjuïc)":100,"Plaça del Sol (Gràcia)":45,"Dry Martini":35,"Razzmatazz":-20,"Passeig de Gràcia":20,"Alhambra y Generalife":75,"Albaicín":70,"Carrera del Darro y Paseo de los Tristes":20,"Sacromonte y sus cuevas":70,"Monasterio de la Cartuja":35,"Parque de las Ciencias":-40,"Bar Poë":-20,"Taberna La Tana":-20,"Carmen de Aben Humeya":45,"El Trillo":65,"Mirador de San Nicolás":70,"Mirador de San Cristóbal":55,"Mirador de San Miguel Alto":115,"Peña La Platería (flamenco)":65,"Cerámica de Fajalauza en el Albaicín":40,"Puente de Cabrera y la Alhambra":20,"El Cabanyal":-20,"Playa de la Malvarrosa":-25,"Excursión a la Albufera y El Palmar":-20,"Casa Carmela":-20,"La Pepica":-20,"Bodega La Pascuala":-20,"Casa Montaña":-20,"Ciudad de las Artes al atardecer":-20,"La Fábrica de Hielo (Cabanyal)":-20,"Puente de l'Assut de l'Or":-20,"Castillo de Gibralfaro":75,"Muelle Uno y Palmeral de las Sorpresas":-20,"Jardín Botánico de la Concepción":75,"Excursión al Caminito del Rey":270,"José Carlos García":-20,"Mirador de Gibralfaro":100,"La Farola y el Muelle Uno":-20,"Museo Guggenheim Bilbao":-20,"Basílica de Begoña":70,"Puente Zubizuri":-20,"Excursión al Puente Bizkaia":-20,"Sorginzulo":70,"Nerua":-20,"Mirador de Artxanda":115,"Parque Etxebarria":40,"Back&Stage":-20,"Castel Nuovo":-30,"Castel dell'Ovo":-40,"Castel Sant'Elmo y la Certosa":200,"Museo de Capodimonte":110,"Quartieri Spagnoli y el mural de Maradona":30,"Catacumbas de San Gennaro":70,"Excursión a Pompeya":-35,"Excursión al Vesubio":975,"Excursión a Capri":405,"L'Antica Pizzeria da Michele":-20,"Pizzeria Starita":45,"50 Kalò":-30,"Mimì alla Ferrovia":-20,"Borgo Marinari al atardecer":-45,"Belvedere de San Martino":175,"L'Antiquario":-30,"Baretti de Chiaia":-20,"Santuario Meiji":25,"Cruce de Shibuya":20,"Shinjuku Gyoen":20,"Shimokitazawa":25,"Jardín Hama-rikyu":-20,"Excursión a Nikko":645,"Omoide Yokocho":25,"Tempura Tsunahachi (Shinjuku)":35,"Odaiba al atardecer (Rainbow Bridge)":-25,"Nonbei Yokocho":20,"Bar Benfiddich":35,"Castell de Bellver":90,"Fundació Miró Mallorca":40,"Playa de Can Pere Antoni":-20,"Portixol y Ciutat Jardí":-20,"Excursión a Valldemossa":390,"Excursión a Sóller en el tren de Sóller":20,"Excursión a la playa de Es Trenc":-20,"Tren de Montenvers y Mar de Glace":810,"Le Brévent":935,"Lac Blanc":1320,"Lac des Gaillands":-20,"Cascade du Dard":230,"Excursión a Annecy":-590,"Lac des Gaillands al atardecer":-20,"Café Schuh":-70,"Harder Kulm":260,"Höhematte":-65,"Unterseen (casco antiguo)":-70,"Cuevas de San Beato":80,"Crucero por el lago de Brienz":-75,"Iseltwald":-70,"Excursión al Jungfraujoch":2815,"Excursión al valle de Lauterbrunnen":165,"Excursión a Grindelwald First":415,"Excursión a Schynige Platte":1330,"Hüsi Bierhaus":-70,"Restaurant Bebbis":-70,"Restaurant Goldener Anker":-75,"Restaurante del Harder Kulm":725,"Pasarela de los dos lagos (Harder Kulm)":725,"Mama's House (Fira)":85,"Fira y el paseo de la caldera":85,"Ruta por la caldera de Fira a Oia":150,"Imerovigli y la roca de Skaros":190,"Pyrgos":200,"Museo de la Thera Prehistórica":85,"Yacimiento de Akrotiri":-100,"Playa Roja":-130,"Playa de Perissa":-130,"Playa de Kamari":-110,"Bahía de Ammoudi":-105,"Catamarán por la caldera":-120,"Lucky's Souvlakis":85,"Metaxi Mas":60,"Ammoudi Fish Tavern":-120,"Atardecer en el castillo de Oia":-65,"Santo Wines al atardecer":155,"Koo Club":90};
 /*/ELEV-DATA*/
 // cómo subir a los cerros conocidos sin dejarte las piernas (lo que te diría alguien de allí)
 const HILLHOW=[
@@ -703,6 +707,9 @@ const HOURS=[
 ];
 // horario típico por tipo de sitio, para los que no tenemos en la lista (se dice que es aproximado)
 const HOURK={museo:["10:00","18:00"],palacio:["10:00","18:00","17:00"],ruinas:["09:00","19:00","17:00"],zoo:["10:00","18:00","17:00"],cueva:["10:00","17:00"],torre:["10:00","19:00","18:00"],mercado:["08:00","14:30"]};
+// temporada de los sitios que solo abren una parte del año: [nombre, meses (1-12), texto]. Sin fecha se avisa en la parada.
+const SEASON=[];
+function seasonOf(nm){const r=SEASON.find(x=>x[0].test(nm||""));return r?{months:r[1],txt:r[2]}:null;}
 const MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 // horario de un sitio un día concreto: abre (o), cierra (c), si es dato conocido y el texto para la ficha
 function hoursOf(a,date){
@@ -893,6 +900,8 @@ function prepPool(key,o){
     if(cat==="comida"&&SNACK_RX.test(norm(a.nm)))cat="merienda";
     if(o.familia&&(cat==="copas"||cat==="disco"))return;
     if(o.mayores&&cat==="disco")return;
+    // fuera de temporada (teleféricos de montaña, islas en invierno…): con fecha, no entra en el plan
+    if(o.month){const z=seasonOf(a.nm);if(z&&!z.months.includes(o.month))return;}
     // con los padres: nada de rutas de montaña ni de cientos de escalones
     if(o.mayores&&(cat==="sight"||cat==="atardecer")&&HARD_RX.test(a.nm))return;
     if(o.familia&&KIDNO_RX.test(norm(a.nm+" "+(a.d||"")))&&cat!=="cena"&&cat!=="comida")return;
@@ -953,7 +962,7 @@ const COMPWHY={
   solo:{romantico:"Viajando solo, «romántico» se traduce en miradores, atardeceres y cafés con encanto; si no es lo que buscas, quítalo.",fiesta:"De noche, mejor zonas con mucho ambiente y bien comunicadas para volver."},
   amigos:{romantico:"En grupo, lo romántico suele sobrar; los atardeceres y miradores salen igual con «Fotografía» o «Relax».",fiesta:"Previa, bares y discoteca en las noches en que abren."},
   pareja:{romantico:"Cenas para dos, atardeceres y paseos: sin convertir todo el viaje en eso.",fiesta:"Noches de fiesta alternas, para no dejar el día siguiente en blanco."}};
-function moodPool(key,o){if(!key||!DB[key])return null;return prepPool(key,{moods:o.moods||[],familia:o.compania==="familia",presup:o.presup||"mid"});}
+function moodPool(key,o){if(!key||!DB[key])return null;return prepPool(key,{moods:o.moods||[],familia:o.compania==="familia",presup:o.presup||"mid",month:o.date?new Date(o.date+"T12:00:00").getMonth()+1:null});}
 function moodAdvice(key,o){
   const P=moodPool(key,o);if(!P)return null;
   const month=o.date?new Date(o.date+"T12:00:00").getMonth()+1:null;
@@ -1004,7 +1013,7 @@ const OUTDOOR=new Set(["parque","playa","mirador","barrio","plaza","puente","cru
 function planTrip(destino,dias,moods,ritmo,compania,opts){
   opts=opts||{};
   const key=resolveKey(destino),cc=ccOf(key),LC=LOCALES[cc]||LOCALES._;
-  const o={moods:moods||[],ritmo:ritmo||"equi",compania:compania||"amigos",presup:opts.presup||"mid",familia:compania==="familia",mayores:compania==="mayores"};
+  const o={moods:moods||[],ritmo:ritmo||"equi",compania:compania||"amigos",presup:opts.presup||"mid",familia:compania==="familia",mayores:compania==="mayores",month:opts.inDate?new Date(opts.inDate+"T12:00:00").getMonth()+1:null};
   const P=prepPool(key,o);
   const city=cap(destino);
   const T={key,cc,LC,P,o,city,opts,used:new Set(),dias,maxFame:P.maxFame};
@@ -1035,7 +1044,19 @@ function planTrip(destino,dias,moods,ritmo,compania,opts){
   }
   T.types=types;T.night=night;T.nightWhy=nightWhy;T.excItem=excItem;
   // 3 · reparto de sitios por zonas
-  const groups=allocSights(T);
+  let groups=allocSights(T);
+  // si por hacer la excursión se quedan fuera visitas LARGAS (3 h o más) claramente más importantes que ella
+  // (los teleféricos de Chamonix frente a Annecy), ese día se queda en la ciudad. Montserrat no se toca: en
+  // Barcelona lo que queda fuera son visitas cortas.
+  for(const d of Object.keys(excItem).map(Number)){
+    const ex=excItem[d];
+    const left=P.items.filter(a=>a.cat==="sight"&&!a.auto&&!a.excursion&&a.c&&!T.used.has(a.nm)&&(a.dur||0)>=180&&(a.imp||0)>=(ex.imp||0)+.3);
+    if(left.reduce((t,a)=>t+a.dur,0)>=360){
+      types[d]="barrio";delete excItem[d];
+      T.used=new Set(Object.values(excItem).map(a=>a.nm));T.types=types;
+      groups=allocSights(T);
+    }
+  }
   // 4 · cada día
   T.days=types.map((t,d)=>planDay(T,d,groups[d]||[]));
   T.days.forEach(D=>repairDay(T,D));
@@ -1125,6 +1146,8 @@ function pickNear(T,cat,anchor,opt){
     if(wd!=null){const c=closedOf(a.nm);if(c&&c.wds.includes(wd))continue;}
     if(cat==="disco"&&wd!=null&&!clubOpen(a,wd,opt.date||T.curDate))continue;
     if(opt.filter&&!opt.filter(a))continue;
+    // el mismo sitio con otro nombre no se repite en el día (subir al Harder Kulm y volver a subir a cenar)
+    if(T.curSlots&&["atardecer","cena","comida","copas"].includes(cat)&&T.curSlots.some(q=>q.item&&q.item!==a&&sameSpot(q.item,a)))continue;
     const dk=a.c&&anchor?hav(a.c,anchor):null;
     if(dk!=null&&dk>(opt.maxKm||2.5))continue;
     if(dk==null&&a.c&&!anchor){} // sin ancla: vale cualquiera
@@ -1196,7 +1219,7 @@ function planDay(T,d,grp){
   const ord=[];let cur=left.length?left.shift():null;
   while(cur){ord.push(cur);if(!left.length)break;let bi=0,bd=1e9;left.forEach((a,i)=>{const k=legT(cur,a);if(k<bd){bd=k;bi=i;}});cur=left.splice(bi,1)[0];}
   ord.forEach(a=>T.used.add(a.nm));
-  const slots=[];
+  const slots=[];T.curSlots=slots;
   const zoneC=cent(ord.map(a=>a.c))||T.P.center;
   // --- mañana ---
   let tcur=start,prevC=null,prevA=null;
@@ -1252,13 +1275,13 @@ function planDay(T,d,grp){
       const x=s1.find(x=>slots.indexOf(x.slot)>li&&x.end>st0+15);
       const pos=x?slots.indexOf(x.slot):slots.length;
       const before=slots.slice(0,pos).reverse().find(s=>s.item&&s.item.c);
-      const a=pickNear(T,"atardecer",before?before.item.c:zoneC,{maxKm:2.5,w:.5,pref:["romantico","relax","foto"],cost:sunCost(T,before&&before.item,t)});
+      const a=pickNear(T,"atardecer",before?before.item.c:zoneC,{maxKm:2.5,w:.5,pref:["romantico","relax","foto"],cost:sunCost(T,before&&before.item,t),filter:x=>!slots.some(q=>q.item&&sameSpot(q.item,x))});
       if(a){sun={cat:"atardecer",label:"Atardecer",item:a,dur:a.dur,fixedAt:ss-a.dur+10,sunset:ss};slots.splice(pos,0,sun);}
     }
     const lastStop=[...slots].reverse().find(s=>s.item&&s.item.c);
     const lc=t==="excursion"?T.P.center:(lastStop?lastStop.item.c:zoneC);
     if(wantSun&&!early){
-      const a=pickNear(T,"atardecer",lc,{maxKm:3,w:.3,pref:["romantico","relax","foto"],cost:sunCost(T,t==="excursion"?null:lastStop&&lastStop.item,t)});
+      const a=pickNear(T,"atardecer",lc,{maxKm:3,w:.3,pref:["romantico","relax","foto"],cost:sunCost(T,t==="excursion"?null:lastStop&&lastStop.item,t),filter:x=>!slots.some(q=>q.item&&sameSpot(q.item,x))});
       if(a){const st=ss!=null?ss-a.dur+10:sunStart0;sun={cat:"atardecer",label:"Atardecer",item:a,dur:a.dur,fixedAt:st,sunset:ss};}
     }
     // la cena, cerca de lo último que hayas hecho (el mirador en verano; la última visita en invierno)
@@ -1357,10 +1380,15 @@ function fillGap(T,D){
     if(i<0)return;
     const prev=sch.slice(0,i).reverse().find(x=>x.c);const pc=prev?prev.c:D.zoneC;
     const room=sch[i].gapBefore-20,t0=sch[i].start-sch[i].gapBefore+15;
-    const a=pickNear(T,"sight",pc,{maxKm:2,w:1.5,filter:x=>!x.excursion&&x.dur<=room&&(D.wd==null||!(closedOf(x.nm)&&closedOf(x.nm).wds.includes(D.wd)))&&openAt(x,D.date,t0,x.dur)});
+    const okDay=x=>!x.excursion&&(D.wd==null||!(closedOf(x.nm)&&closedOf(x.nm).wds.includes(D.wd)))&&openAt(x,D.date,t0,x.dur);
+    let a=pickNear(T,"sight",pc,{maxKm:2,w:1.5,filter:x=>okDay(x)&&x.dur<=room});
+    // si cerca no hay nada, un imprescindible de la guía algo más lejos (un teleférico, un mirador) si cabe con el trayecto
+    if(!a&&pc)a=pickNear(T,"sight",pc,{maxKm:7,w:.4,filter:x=>okDay(x)&&!x.auto&&(x.imp||0)>=.5&&x.c&&x.dur+2*legT({c:pc,el:prev&&prev.slot.item?prev.slot.item.el:0},x)<=room});
     if(!a)return;
-    const si=D.slots.indexOf(sch[i].slot);
-    D.slots.splice(si,0,{cat:"sight",label:sch[i].slot.cat==="comida"?"Mañana":"Tarde",item:a,dur:a.dur,extra:true});
+    const si=D.slots.indexOf(sch[i].slot);const before=dayProblems(T,D).length;
+    const ns={cat:"sight",label:sch[i].slot.cat==="comida"?"Mañana":"Tarde",item:a,dur:a.dur,extra:true};
+    D.slots.splice(si,0,ns);
+    if(dayProblems(T,D).length>before){D.slots.splice(D.slots.indexOf(ns),1);return;}
     T.used.add(a.nm);
   }
 }
@@ -1408,6 +1436,7 @@ function materialize(T,D){
       row.push({time:hm(x.start),end:hm(x.end),ic:"",lb:s.label,cat,slot:s,a:{t:a.nm,d:a.d||"",q:a.q||a.nm,real:true,m:a.m||[],vcat,kind:a.kind,dur:s.dur,
         price:priceOf(a,vcat,T.key),el:a.el,own:!!a.own,book:bk,closed:cl?{...cl,today:D.wd!=null&&cl.wds.includes(D.wd)}:null,near:a.near||null,auto:!!a.auto,sunset:s.sunset!=null?hm(s.sunset):null,
         hours:x.H?{o:hm(x.H.o),c:hm(x.H.c).replace(/^00:00$/,"24:00"),known:x.H.known,txt:hoursTxt(x.H),late:x.over>0,cut:!!s.cut}:null,
+        season:(()=>{const z=seasonOf(a.nm);return z&&z.months.length<12?z.txt:null;})(),
         club:cat==="disco"?clubInfo(a,D.wd,D.date):null}});
     }else if(s.gen&&s.cat==="pausa"){
       row.push({time:hm(x.start),end:hm(x.end),ic:"",lb:s.label,cat:"libre",slot:s,a:{t:s.gen.t,d:s.gen.d,real:false,m:[],vcat:"libre",libre:true,dur:s.dur}});
@@ -1564,14 +1593,28 @@ function repairDay(T,D){
       D.slots.splice(D.slots.indexOf(p.s),1);if(p.s.item)T.used.delete(p.s.item.nm);
       D.fixNotes.push(`${slotName(p.s)} no cabía antes de ${D.end!=null?"irte al aeropuerto":"acabar el día"}: lo hemos dejado fuera (lo tienes en el plan B si te sobra tiempo).`);ok=true;
     }else if(p.s&&(p.s.cat==="comida"||p.s.cat==="cena")){
-      const mi=D.slots.indexOf(p.s);let j=-1;
+      // opciones: pasar la última visita de antes a después de comer/cenar (no se pierde nada), o eso mismo
+      // quitando otra visita, o quitar una visita. Gana la que arregla el problema perdiendo lo MENOS importante.
+      const meal=p.s,mi=D.slots.indexOf(meal);let j=-1;
       for(let q=mi-1;q>=0;q--){const x=D.slots[q];if(REMOVABLE.has(x.cat)&&x.label!=="Excursión"&&!x.user){j=q;break;}}
-      if(j>=0){const x=D.slots[j];
-        D.slots.splice(j,1);D.slots.splice(D.slots.indexOf(p.s)+1,0,x);const lb=x.label;if(x.label==="Mañana")x.label="Tarde";
-        if(dayProblems(T,D).length<before){ok=true;D.fixNotes.push(`${slotName(x)} pasa a después de ${p.s.cat==="comida"?"comer":"cenar"} para que la ${p.s.cat} no se retrase.`);}
-        else{restoreDay(D,S);x.label=lb;D.slots.splice(D.slots.indexOf(x),1);
-          if(dayProblems(T,D).length<before){ok=true;if(x.item)T.used.delete(x.item.nm);D.fixNotes.push(`${slotName(x)} no cabía sin retrasar la ${p.s.cat}: lo hemos dejado fuera (está en el plan B).`);}
-          else restoreDay(D,S);}}
+      const rem=D.slots.filter(x=>REMOVABLE.has(x.cat)&&x.label!=="Excursión"&&!x.user);
+      const imp=x=>x.item?popOf(T,x.item):0;
+      const opts=[];
+      // empezar el día un poco antes (no se pierde nada y lo largo va por la mañana, cuando mejor se ve)
+      if(meal.cat==="comida"&&D.type!=="llegada"&&!D.late&&D.start>tmin("08:15"))[30,45].forEach(dm=>opts.push({loss:-.01+dm/1e4,run:()=>{D.start-=dm;return {note:`Hoy se empieza ${dm===30?"media hora":"tres cuartos de hora"} antes para que todo quepa antes de comer.`};}}));
+      const moveX=()=>{const x=D.slots[j];D.slots.splice(j,1);D.slots.splice(D.slots.indexOf(meal)+1,0,x);if(x.label==="Mañana")x.label="Tarde";return x;};
+      if(j>=0)opts.push({loss:0,run:()=>{const x=moveX();return {note:`${slotName(x)} pasa a después de ${meal.cat==="comida"?"comer":"cenar"} para que la ${meal.cat} no se retrase.`};}});
+      rem.forEach(y=>{
+        if(j>=0&&y!==D.slots[j])opts.push({loss:imp(y),run:()=>{const x=moveX();D.slots.splice(D.slots.indexOf(y),1);return {drop:y,note:`${slotName(x)} pasa a después de ${meal.cat==="comida"?"comer":"cenar"} y ${slotName(y)} queda fuera (está en el plan B) para que todo quepa.`};}});
+        opts.push({loss:imp(y)+.01,run:()=>{D.slots.splice(D.slots.indexOf(y),1);return {drop:y,note:`${slotName(y)} no cabía sin retrasar la ${meal.cat}: lo hemos dejado fuera (está en el plan B).`};}});
+      });
+      opts.sort((a,b)=>a.loss-b.loss);
+      const st0=D.start;
+      for(const o of opts){
+        const lbs=D.slots.map(x=>x.label);const r=o.run();
+        if(dayProblems(T,D).length<before){ok=true;if(r.drop&&r.drop.item)T.used.delete(r.drop.item.nm);D.fixNotes.push(r.note);break;}
+        restoreDay(D,S);D.slots.forEach((x,k)=>{x.label=lbs[k];});D.start=st0;
+      }
     }
     if(!ok&&p.s&&p.s.cat==="cena"&&D.type==="excursion"){
       // día de excursión: se acorta la estancia allí (mínimo 4 h) para volver a cenar a una hora normal

@@ -8,8 +8,8 @@ cena, copas y discoteca. Cada día tiene sentido geográfico, respeta horarios y
 
 ## Qué hace
 
-- **34 ciudades hechas a mano** (Barcelona, Valencia, Granada, Málaga, Bilbao, Madrid, Sevilla, Roma, Nápoles, París,
-  Budapest, Tokio…). Tienen coordenadas comprobadas en OpenStreetMap, horarios, días de cierre, reservas, noches de
+- **38 destinos hechos a mano** (Barcelona, Valencia, Granada, Málaga, Bilbao, Madrid, Sevilla, Roma, Nápoles, París,
+  Budapest, Tokio…, y de montaña y playa: Chamonix, Interlaken, Palma de Mallorca y Santorini, con sus temporadas). Tienen coordenadas comprobadas en OpenStreetMap, horarios, días de cierre, reservas, noches de
   apertura de las discotecas y cómo subir a cada cerro. Cualquier otra ciudad usa una **guía automática** con Wikidata.
 - **Motor de viaje** propio y determinista. Hace cuatro cosas:
   - días con tipo (llegada, barrio, excursión, vuelta) y zona;

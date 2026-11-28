@@ -23,7 +23,7 @@ se añade un LLM, debería ocupar solo la capa de explicar y personalizar textos
 | Autenticación | Real | Supabase email + contraseña; modo local de respaldo (SHA-256 + sal; hash débil en `file://`). |
 | Vuelos | Real | AeroDataBox (clave en Vercel). Número y fecha obligatorios: los números de vuelo se repiten a diario. |
 | Hotel | Parcial | Se geocodifica con Nominatim para medir distancias. **No hay reserva real**: «Reservar ahora» abre Booking.com. |
-| Destinos curados | Real | **34 ciudades** con sitios de nombre propio, coordenadas, horarios, cierres, reservas y noches de discoteca. |
+| Destinos curados | Real | **38 destinos** (incluidos montaña y playa: Chamonix, Interlaken, Palma, Santorini) con sitios de nombre propio, coordenadas, horarios, cierres, reservas, noches de discoteca y **temporadas** (lo cerrado ese mes no entra en el plan). |
 | Guía automática | Real, calidad variable | Cualquier ciudad vía Wikidata + Nominatim, con caché de 30 días en la CDN. Fuerte en monumentos; débil en restaurantes, bares y naturaleza de pueblos pequeños (ver test F). |
 | Generación de itinerarios | Real (motor propio, determinista) | Tipos de día, zonas, horas reales, ocaso NOAA, cierres, discotecas, cuestas, plan B. |
 | Mapas | Real | Pines numerados por día y rutas en línea; mapa del viaje por días. |
@@ -164,7 +164,7 @@ Otras: `humo-ciudades.js` (68 viajes en 34 ciudades, 0 errores), `horarios-disco
 1. Vigilar el volumen de rutas (Transitous pide hablar con ellos por encima de ~720 al día) y, si crece, cachear por tramo más tiempo o montar un OpenTripPlanner propio.
 2. Edición: arrastrar paradas entre días y que «Cambiar» reescriba los textos vecinos.
 3. **Presupuesto real por plan:** sumar las paradas del itinerario (entradas y comidas), separar lo confirmado, lo estimado y lo pendiente, y proponer alternativas baratas equivalentes.
-4. **Naturaleza y montaña** en la guía automática: picos, rutas, telecabinas y refugios. OpenStreetMap vía Overpass está bloqueado (406), así que haría falta otra vía o curar destinos de montaña.
+4. Más destinos de montaña y playa (hechos: Chamonix, Interlaken, Palma, Santorini). La guía automática sigue floja en naturaleza: OpenStreetMap vía Overpass está bloqueado (406).
 5. **Validador antes de enseñar el plan** (las comprobaciones de `tests/` dentro de la app) y fiabilidad por dato en la ficha.
 6. Moods nuevos del encargo (Wellness, Beach, Architecture, Hidden gems…): solo cuando haya datos que los respalden. Muchos se pueden derivar del tipo de sitio (termas → Wellness, playa → Beach, palacio o iglesia → Architecture).
 7. Previsión del tiempo (Open-Meteo, gratis) para el plan B con fechas cercanas.

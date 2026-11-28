@@ -586,6 +586,7 @@ function openModal(id){
   else if(d.book)rows.push(["ticket","Reserva","No hace falta, pero online te ahorras la cola."]);
   if(d.closed)rows.push(["alert","Cierre semanal",`Cierra ${d.closed.txt}.`+(d.closed.today?" Ese día de tu viaje está cerrado: cámbialo.":"")]);
   if(d.hours)rows.push(["calendar","Horario",d.hours.txt+(d.hours.late?" Con el orden de hoy llegas cuando ya ha cerrado: cámbialo.":"")+(d.hours.cut?" El plan acorta un poco la visita para salir a la hora de cierre.":"")]);
+  if(d.season)rows.push(["calendar","Temporada",`Solo abre ${d.season}. Con la fecha del viaje, el plan solo lo incluye si está abierto.`]);
   if(d.club)rows.push(["calendar","Qué noches abre",`Suele abrir ${d.club.txt}${d.club.months?`, y solo ${d.club.months}`:""}${d.club.known?"":" (lo habitual en las discotecas; no tenemos su horario exacto)"}.`+(d.club.open===false?" Esa noche de tu viaje no suele abrir: cámbiala.":"")+" Mira su agenda en su web o Instagram antes de ir: hay noches privadas y cierres por vacaciones."]);
   if(d.near&&d.near.length)rows.push(["pin","Al lado, de paso",d.near.join(", ")]);
   rows.push(["bulb","Truco local",info.tip]);
@@ -597,7 +598,7 @@ function openModal(id){
   document.getElementById("modal").classList.add("show");
 }
 // de dónde sale cada dato de la ficha y cómo de fiable es (verificado / estimado / no disponible)
-const GUIDE_REV={barcelona:"nov. 2026",granada:"nov. 2026",valencia:"nov. 2026",malaga:"nov. 2026",bilbao:"nov. 2026",napoles:"nov. 2026",tokio:"nov. 2026"};
+const GUIDE_REV={barcelona:"nov. 2026",granada:"nov. 2026",valencia:"nov. 2026",malaga:"nov. 2026",bilbao:"nov. 2026",napoles:"nov. 2026",tokio:"nov. 2026",palma:"nov. 2026",chamonix:"nov. 2026",interlaken:"nov. 2026",santorini:"nov. 2026"};
 const DATA_REV="nov. 2026"; // horarios, cierres, reservas y noches de discoteca revisados
 function fmtDay(t){if(!t)return "";const d=new Date(t);return `${d.getDate()} ${["ene.","feb.","mar.","abr.","may.","jun.","jul.","ago.","sept.","oct.","nov.","dic."][d.getMonth()]} ${d.getFullYear()}`;}
 function provenanceHtml(d){

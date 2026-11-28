@@ -404,3 +404,145 @@ HILLHOW.push(
   [/artxanda/i,"Funicular de Artxanda desde la plaza del Funicular (va con la tarjeta Barik): tres minutos."],
   [/bego[ñn]a|etxebarria/i,"Ascensor de Begoña desde la calle Esperanza, junto al Casco Viejo."],
   [/sant'?elmo|san martino|vomero/i,"Funicular Centrale desde Via Toledo (o el de Montesanto) hasta el Vomero, con el billete normal, y unos minutos andando."]);
+
+/* ============ GUÍAS HECHAS A MANO: montaña (Chamonix, Interlaken) y playa (Palma, Santorini) — coordenadas de OpenStreetMap; temporadas y cierres revisados en nov. 2026 ============ */
+DB.palma=[
+  {cat:"desayuno",nm:"Ca'n Joan de s'Aigo",m:["gastro", "cultural"],d:"Chocolate espeso y ensaimadas en una granja de 1700 en pleno casco antiguo. Pide también el helado de almendra.",q:"ensaimada"},
+  {cat:"desayuno",nm:"Forn des Teatre",m:["gastro", "foto"],d:"Horno de fachada modernista junto a la plaza Weyler: ensaimadas y cocas para llevar.",q:"Forn des Teatre"},
+  {cat:"desayuno",nm:"Bar Bosch",m:["gastro"],d:"El café de toda la vida en la plaza de Joan Carles I: un llonguet y un cortado viendo pasar Palma.",q:"Spanish cafe terrace"},
+  {cat:"sight",nm:"Catedral de Mallorca (La Seu)",m:["cultural", "foto", "romantico"],d:"La catedral gótica sobre el mar, con el baldaquino de Gaudí y la intervención de Barceló. Los domingos no se visita (solo misas).",q:"Palma Cathedral"},
+  {cat:"sight",nm:"Palau de l'Almudaina",m:["cultural"],kind:"palacio",d:"El palacio real junto a la catedral, antigua alcazaba árabe. Patrimonio Nacional: cierra los lunes.",q:"Royal Palace of La Almudaina"},
+  {cat:"sight",nm:"Castell de Bellver",m:["cultural", "foto", "aventura"],kind:"palacio",d:"El único castillo circular de España, en lo alto de un bosque sobre la bahía. Gratis los domingos.",q:"Bellver Castle"},
+  {cat:"sight",nm:"Es Baluard Museu",m:["cultural", "foto"],kind:"museo",d:"Arte moderno dentro del baluarte renacentista de la muralla; la terraza da a la bahía. Cierra los lunes.",q:"Es Baluard"},
+  {cat:"sight",nm:"Fundació Miró Mallorca",m:["cultural"],kind:"museo",d:"Los talleres donde Miró pintó sus últimos 30 años, en Cala Major. Ve en bus o taxi.",q:"Fundació Pilar i Joan Miró"},
+  {cat:"sight",nm:"Banys Àrabs de Palma",m:["cultural", "relax"],kind:"monumento",d:"Unos baños árabes del siglo X con su sala de cúpula y un jardín tranquilo en el barrio de la Calatrava.",q:"Arab Baths Palma"},
+  {cat:"sight",nm:"Basílica de Sant Francesc",m:["cultural"],d:"Iglesia gótica con uno de los claustros más bonitos de Mallorca; aquí está enterrado Ramon Llull.",q:"Basilica of Sant Francesc Palma"},
+  {cat:"sight",nm:"Casco antiguo de Palma (patios y Born)",m:["cultural", "foto", "romantico"],kind:"barrio",d:"Calles de piedra con patios señoriales escondidos tras los portones, hasta el Passeig del Born.",q:"Palma old town"},
+  {cat:"sight",nm:"Barrio de Santa Catalina",m:["gastro", "fiesta", "foto"],kind:"barrio",d:"El antiguo barrio de pescadores: mercado, bares y restaurantes de moda. Por la noche, el más animado.",q:"Santa Catalina Palma"},
+  {cat:"sight",nm:"Playa de Can Pere Antoni",m:["relax", "aventura"],kind:"playa",d:"La playa urbana más cercana al centro, con la catedral de fondo. Para un baño sin coger nada.",q:"Can Pere Antoni beach"},
+  {cat:"sight",nm:"Portixol y Ciutat Jardí",m:["relax", "romantico"],kind:"playa",d:"Paseo marítimo hacia el este: el puertecito de Portixol, chiringuitos y la playa de Ciutat Jardí.",q:"Portixol Palma"},
+  {cat:"sight",nm:"Excursión a Valldemossa",m:["cultural", "romantico", "foto"],d:"El pueblo de la sierra de Tramuntana con la Cartuja donde vivieron Chopin y George Sand. Bus 203 desde la estación (unos 30 min).",q:"Valldemossa"},
+  {cat:"sight",nm:"Excursión a Sóller en el tren de Sóller",m:["aventura", "foto", "romantico"],d:"El tren de madera de 1912 cruza la Tramuntana hasta Sóller; luego el tranvía baja al puerto.",q:"Ferrocarril de Sóller"},
+  {cat:"sight",nm:"Excursión a la playa de Es Trenc",m:["relax", "aventura"],kind:"playa",d:"Arena blanca y agua turquesa en una playa virgen del sur. En verano, ve temprano: el aparcamiento se llena.",q:"Es Trenc"},
+  {cat:"comida",nm:"Mercat de l'Olivar (barras)",m:["gastro", "cultural"],d:"El mercado de toda la vida de Palma: barras de pescado, ostras y tapas. Cierra los domingos.",q:"Mercat de l'Olivar"},
+  {cat:"comida",nm:"Celler Sa Premsa",m:["gastro", "cultural"],d:"Celler de 1958 con barricas gigantes: frito mallorquín, tumbet y lechona como en casa.",q:"Mallorcan food tumbet"},
+  {cat:"comida",nm:"La Bodeguilla",m:["gastro"],d:"Tapas y vinos mallorquines en la calle Sant Jaume, a dos pasos del Born.",q:"tapas bar Spain"},
+  {cat:"cena",nm:"Patrón Lunares",m:["gastro", "fiesta"],d:"Antigua cofradía de pescadores de Santa Catalina reconvertida en restaurante de producto con mucho ambiente.",q:"seafood restaurant Spain"},
+  {cat:"cena",nm:"Marc Fosh",m:["gastro", "romantico"],lux:true,d:"Cocina mediterránea con estrella Michelin en un antiguo convento del centro. Reserva con tiempo.",q:"fine dining restaurant"},
+  {cat:"atardecer",nm:"Dalt Murada al atardecer",m:["romantico", "foto", "relax"],d:"El paseo sobre la muralla, entre la catedral y el mar: la bahía se tiñe de naranja con La Seu iluminada detrás.",q:"Palma Cathedral sunset"},
+  {cat:"copas",nm:"Abaco",m:["romantico", "cultural"],d:"Coctelería barroca en un palacete del siglo XVII, con fruta amontonada y música clásica. Cara, pero única.",q:"Abaco Palma"},
+  {cat:"copas",nm:"Bares de Santa Catalina",m:["fiesta", "gastro"],d:"Las calles Fábrica y Sant Magí: terrazas, vermut y copas hasta tarde.",q:"Santa Catalina bars night"},
+  {cat:"disco",nm:"Fitz Mallorca",m:["fiesta"],d:"El club del Paseo Marítimo, en el local del mítico Tito's, con terraza sobre la bahía (abrió en julio de 2026).",q:"nightclub Mallorca"}
+];
+DB.chamonix=[
+  {cat:"desayuno",nm:"Moody Coffee Roasters",m:["relax", "gastro"],d:"Café de especialidad tostado en el valle: buen sitio para el café antes de subir a la montaña.",q:"specialty coffee"},
+  {cat:"desayuno",nm:"Le Fournil Chamoniard",m:["gastro"],d:"Panadería del centro: croissants, pan de montaña y bocadillos para llevar a la excursión.",q:"french bakery croissant"},
+  {cat:"sight",nm:"Aiguille du Midi",m:["aventura", "foto"],kind:"mirador",d:"El teleférico sube a 3.842 m en 20 minutos: el Mont Blanc de frente y el «Pas dans le Vide», un cubo de cristal sobre el vacío. Reserva la hora de subida.",q:"Aiguille du Midi"},
+  {cat:"sight",nm:"Tren de Montenvers y Mar de Glace",m:["aventura", "cultural", "foto"],kind:"mirador",d:"El tren de cremallera sube al mayor glaciar de Francia; se baja a una gruta excavada en el hielo. Verás cuánto ha retrocedido.",q:"Mer de Glace"},
+  {cat:"sight",nm:"Le Brévent",m:["aventura", "foto", "romantico"],kind:"mirador",d:"Telecabina y teleférico hasta 2.525 m, enfrente del Mont Blanc: la vista más completa del macizo.",q:"Le Brévent"},
+  {cat:"sight",nm:"Lac Blanc",m:["aventura", "relax", "foto"],kind:"parque",d:"La ruta de montaña más bonita del valle: desde el telesilla de La Flégère, unas 2 h de subida hasta un lago con el Mont Blanc reflejado. Calzado de montaña y agua.",q:"Lac Blanc Chamonix"},
+  {cat:"sight",nm:"Centro de Chamonix",m:["cultural", "foto", "compras"],kind:"barrio",d:"La calle del Doctor Paccard, la iglesia de Saint-Michel y la estatua de Balmat y Saussure señalando la cumbre.",q:"Chamonix town"},
+  {cat:"sight",nm:"Musée Alpin de Chamonix",m:["cultural"],kind:"museo",d:"La historia del alpinismo y del valle en un antiguo hotel de 1900. Pequeño y muy bien contado.",q:"Musée Alpin Chamonix"},
+  {cat:"sight",nm:"Lac des Gaillands",m:["relax", "aventura"],kind:"parque",d:"Un lago con el Mont Blanc reflejado y una pared de escalada para aprender; a 15 minutos andando del centro.",q:"Lac des Gaillands"},
+  {cat:"sight",nm:"Bois du Bouchet",m:["relax"],kind:"parque",d:"El gran parque del valle junto al río Arve: paseo llano entre abetos, con vistas a las agujas.",q:"Chamonix forest Arve"},
+  {cat:"sight",nm:"Cascade du Dard",m:["aventura", "relax"],kind:"parque",d:"Paseo corto por el bosque hasta una cascada, desde el pie de la telecabina del Glaciar de los Bossons.",q:"Cascade du Dard"},
+  {cat:"sight",nm:"Excursión a Annecy",m:["romantico", "cultural", "foto"],d:"La «Venecia de los Alpes»: canales, el Palacio de la Isla y un lago turquesa. Una hora y media en coche o bus.",q:"Annecy"},
+  {cat:"comida",nm:"La Calèche",m:["gastro", "cultural"],d:"Cocina saboyana en una casa llena de objetos de montaña: tartiflette y fondue en el centro.",q:"tartiflette"},
+  {cat:"comida",nm:"Munchie",m:["gastro"],d:"Cocina de fusión en una casa de madera del centro: el plan para cuando estés harto del queso.",q:"fusion restaurant"},
+  {cat:"cena",nm:"Le Monchu",m:["gastro", "romantico"],d:"Fondue, raclette y pierrade junto a la iglesia: la cena saboyana de manual.",q:"raclette"},
+  {cat:"atardecer",nm:"Lac des Gaillands al atardecer",m:["romantico", "foto", "relax"],d:"Cuando el sol baja, el Mont Blanc se pone rosa y se refleja en el lago. El último rato de luz es el mejor.",q:"Mont Blanc alpenglow"},
+  {cat:"copas",nm:"MBC (Micro Brasserie de Chamonix)",m:["fiesta", "gastro"],d:"Cervecería artesanal con música en directo, llena de esquiadores y alpinistas.",q:"craft beer bar"},
+  {cat:"copas",nm:"Chambre Neuf",m:["fiesta"],d:"El après-ski de siempre, enfrente de la estación: cerveza, mesas y gente bailando encima.",q:"apres ski bar"},
+  {cat:"copas",nm:"Elevation 1904",m:["fiesta", "relax"],d:"Bar de alpinistas frente a la estación, con terraza y ambiente de montaña.",q:"mountain bar"}
+];
+DB.interlaken=[
+  {cat:"desayuno",nm:"Café Schuh",m:["gastro", "romantico"],d:"Pastelería y chocolatería de 1818 frente a la gran pradera del Höhematte, con terraza y vistas al Jungfrau.",q:"Swiss pastry chocolate"},
+  {cat:"sight",nm:"Harder Kulm",m:["foto", "romantico", "aventura"],kind:"mirador",d:"Funicular de 10 minutos al mirador de Interlaken: los dos lagos a los pies y Eiger, Mönch y Jungfrau enfrente.",q:"Harder Kulm"},
+  {cat:"sight",nm:"Höhematte",m:["relax", "foto"],kind:"parque",d:"La gran pradera del centro, donde aterrizan los parapentes con las cumbres nevadas de fondo.",q:"Höhematte Interlaken"},
+  {cat:"sight",nm:"Unterseen (casco antiguo)",m:["cultural", "foto"],kind:"barrio",d:"El pueblo antiguo al otro lado del río Aare: casas de madera, la iglesia y la plaza del mercado.",q:"Unterseen"},
+  {cat:"sight",nm:"Cuevas de San Beato",m:["aventura", "cultural"],kind:"cueva",d:"Un kilómetro de cuevas con cascadas subterráneas sobre el lago de Thun, a 15 minutos en bus. Abren de primavera a otoño.",q:"St. Beatus Caves"},
+  {cat:"sight",nm:"Crucero por el lago de Brienz",m:["relax", "romantico", "foto"],kind:"crucero",d:"Los barcos de línea cruzan el lago turquesa hasta Iseltwald y Brienz. Va con muchos pases de transporte.",q:"Lake Brienz boat"},
+  {cat:"sight",nm:"Iseltwald",m:["romantico", "foto"],kind:"barrio",d:"Pueblo diminuto en una península del lago de Brienz, con su embarcadero famoso. Bus 103 desde Interlaken Ost.",q:"Iseltwald"},
+  {cat:"sight",nm:"Excursión al Jungfraujoch",m:["aventura", "foto"],d:"El «Top of Europe»: tren de cremallera hasta 3.454 m dentro del Eiger, el glaciar Aletsch y el Palacio de Hielo. Caro: reserva con tiempo y mira el parte.",q:"Jungfraujoch"},
+  {cat:"sight",nm:"Excursión al valle de Lauterbrunnen",m:["aventura", "foto", "relax"],d:"El valle de las 72 cascadas: la de Staubbach cae junto al pueblo y, de abril a noviembre, las de Trümmelbach rugen dentro de la montaña.",q:"Lauterbrunnen"},
+  {cat:"sight",nm:"Excursión a Grindelwald First",m:["aventura", "foto"],d:"Telecabina desde Grindelwald hasta First: la pasarela colgada del First Cliff Walk y, en verano, el lago Bachalpsee a una hora andando.",q:"Grindelwald First"},
+  {cat:"sight",nm:"Excursión a Schynige Platte",m:["aventura", "relax", "foto"],d:"Tren de cremallera de 1893 hasta un jardín alpino con vistas al Eiger, Mönch y Jungfrau. Solo en verano.",q:"Schynige Platte"},
+  {cat:"comida",nm:"Hüsi Bierhaus",m:["gastro", "fiesta"],d:"Cervecería con decenas de cervezas suizas y cocina de pub, en el centro.",q:"Swiss beer pub"},
+  {cat:"comida",nm:"Restaurant Bebbis",m:["gastro", "cultural"],d:"Cocina suiza tradicional (rösti, fondue, schnitzel) en un comedor de madera junto al Höhematte.",q:"rösti"},
+  {cat:"cena",nm:"Restaurant Goldener Anker",m:["gastro"],d:"Restaurante y sala de conciertos de toda la vida: carne a la piedra y cocina suiza.",q:"Swiss restaurant fondue"},
+  {cat:"cena",nm:"Restaurante del Harder Kulm",m:["romantico", "gastro"],d:"Cenar en el mirador, con los lagos a los pies; se sube en el funicular. Solo en temporada.",q:"Harder Kulm restaurant"},
+  {cat:"atardecer",nm:"Pasarela de los dos lagos (Harder Kulm)",m:["romantico", "foto"],d:"La plataforma sobre el vacío del Harder Kulm al caer el sol, con las cumbres rosadas enfrente.",q:"Harder Kulm Two Lakes Bridge"},
+  {cat:"atardecer",nm:"Orilla del lago de Thun en Neuhaus",m:["relax", "romantico"],d:"La playa de Neuhaus, a las afueras: el sol se pone sobre el lago de Thun.",q:"Lake Thun sunset"}
+];
+DB.santorini=[
+  {cat:"desayuno",nm:"Mama's House (Fira)",m:["gastro"],d:"Desayunos copiosos en una terraza de Fira: tortitas, huevos y yogur griego con miel.",q:"greek yogurt honey breakfast"},
+  {cat:"sight",nm:"Oia y su castillo",m:["romantico", "foto"],kind:"barrio",d:"El pueblo de casas blancas y cúpulas azules colgado de la caldera. Por la mañana se pasea sin gente.",q:"Oia Santorini"},
+  {cat:"sight",nm:"Fira y el paseo de la caldera",m:["foto", "compras", "romantico"],kind:"barrio",d:"La capital, sobre el acantilado: el paseo junto al borde con el volcán enfrente, tiendas y la escalera al puerto viejo.",q:"Fira Santorini"},
+  {cat:"sight",nm:"Ruta por la caldera de Fira a Oia",m:["aventura", "foto"],kind:"barrio",d:"10 km por el borde del acantilado pasando por Firostefani e Imerovigli (3-4 h). Sal temprano: casi no hay sombra.",q:"Fira to Oia hike"},
+  {cat:"sight",nm:"Imerovigli y la roca de Skaros",m:["aventura", "foto", "romantico"],kind:"mirador",d:"El balcón de la caldera, con un sendero que baja hasta la roca de Skaros, donde hubo un castillo veneciano.",q:"Skaros Rock"},
+  {cat:"sight",nm:"Pyrgos",m:["cultural", "foto", "relax"],kind:"barrio",d:"Pueblo de interior en lo alto de una colina, con calles laberínticas y vistas a toda la isla; mucha menos gente que Oia.",q:"Pyrgos Santorini"},
+  {cat:"sight",nm:"Museo de la Thera Prehistórica",m:["cultural"],kind:"museo",d:"Los frescos y objetos de Akrotiri, la ciudad que sepultó el volcán, en Fira.",q:"Museum of Prehistoric Thera"},
+  {cat:"sight",nm:"Yacimiento de Akrotiri",m:["cultural", "aventura"],kind:"ruinas",d:"Una ciudad de la Edad del Bronce conservada bajo la ceniza, cubierta por una gran estructura. Mira el horario: en invierno es más corto.",q:"Akrotiri archaeological site"},
+  {cat:"sight",nm:"Playa Roja",m:["foto", "relax"],kind:"playa",d:"Acantilado de roca roja junto a Akrotiri; se llega por un sendero corto (ojo con los desprendimientos: respeta los carteles).",q:"Red Beach Santorini"},
+  {cat:"sight",nm:"Playa de Perissa",m:["relax", "aventura"],kind:"playa",d:"Arena volcánica negra y aguas limpias, con chiringuitos y la montaña Mesa Vouno detrás.",q:"Perissa beach"},
+  {cat:"sight",nm:"Playa de Kamari",m:["relax"],kind:"playa",d:"Playa de arena negra con un paseo lleno de cafés, al pie de la antigua Thera.",q:"Kamari beach"},
+  {cat:"sight",nm:"Bahía de Ammoudi",m:["romantico", "foto", "relax"],kind:"barrio",d:"El puertecito al pie de Oia, con tabernas de pescado sobre el agua; se baja por 300 escalones.",q:"Ammoudi Bay"},
+  {cat:"sight",nm:"Catamarán por la caldera",m:["romantico", "relax", "aventura"],kind:"crucero",d:"Navegación por la caldera con baño en las aguas termales del volcán y comida a bordo. Solo en temporada.",q:"Santorini catamaran"},
+  {cat:"comida",nm:"Lucky's Souvlakis",m:["gastro"],d:"Pita gyros y souvlaki baratos en una ventana de Fira: lo que comen los de la isla.",q:"souvlaki gyros"},
+  {cat:"comida",nm:"Pitogyros (Oia)",m:["gastro"],d:"Gyros y souvlaki en el corazón de Oia, para comer rico sin pagar las vistas.",q:"gyros pita"},
+  {cat:"cena",nm:"Metaxi Mas",m:["gastro", "romantico"],d:"Taberna en Exo Gonia, lejos de los turistas, con la mejor cocina cretense y de la isla. Reserva: siempre llena.",q:"Greek taverna dinner"},
+  {cat:"cena",nm:"Ammoudi Fish Tavern",m:["romantico", "gastro"],d:"Pescado a la parrilla con las mesas casi en el agua, al pie de Oia.",q:"grilled fish Greece"},
+  {cat:"cena",nm:"Melitini (Oia)",m:["gastro", "romantico"],d:"Meze griegos para compartir en una terraza de Oia.",q:"meze Greek"},
+  {cat:"atardecer",nm:"Atardecer en el castillo de Oia",m:["romantico", "foto"],d:"El atardecer más famoso de Grecia. Llega al menos una hora antes para pillar sitio, o míralo desde una terraza.",q:"Oia sunset"},
+  {cat:"atardecer",nm:"Santo Wines al atardecer",m:["romantico", "gastro", "relax"],d:"Bodega sobre la caldera: cata de assyrtiko y vinsanto con la puesta de sol.",q:"Santo Wines"},
+  {cat:"disco",nm:"Koo Club",m:["fiesta"],d:"La discoteca más conocida de la isla, en Fira, con pista al aire libre. Solo en temporada.",q:"nightclub outdoor"}
+];
+Object.assign(COORDS,{"Ca'n Joan de s'Aigo":[39.57271,2.64384],"Forn des Teatre":[39.57171,2.65089],"Bar Bosch":[39.57128,2.64742],"Catedral de Mallorca (La Seu)":[39.56747,2.64817],"Palau de l'Almudaina":[39.56798,2.6472],"Castell de Bellver":[39.56386,2.61878],"Es Baluard Museu":[39.57017,2.64103],"Fundació Miró Mallorca":[39.55531,2.61026],"Banys Àrabs de Palma":[39.56681,2.65099],"Basílica de Sant Francesc":[39.56899,2.6531],"Casco antiguo de Palma (patios y Born)":[39.57036,2.64671],"Barrio de Santa Catalina":[39.57137,2.63749],"Playa de Can Pere Antoni":[39.56252,2.66197],"Portixol y Ciutat Jardí":[39.56307,2.6722],"Excursión a Valldemossa":[39.71085,2.62303],"Excursión a Sóller en el tren de Sóller":[39.7663,2.71505],"Excursión a la playa de Es Trenc":[39.34357,2.98543],"Mercat de l'Olivar (barras)":[39.57387,2.6535],"Celler Sa Premsa":[39.57585,2.65001],"La Bodeguilla":[39.5717,2.64715],"Patrón Lunares":[39.57293,2.63689],"Marc Fosh":[39.57364,2.65132],"Dalt Murada al atardecer":[39.56712,2.64732],"Abaco":[39.56896,2.64516],"Bares de Santa Catalina":[39.57312,2.63554],"Fitz Mallorca":[39.56361,2.62723],"Moody Coffee Roasters":[45.91956,6.86903],"Le Fournil Chamoniard":[45.91662,6.86258],"Aiguille du Midi":[45.91821,6.87018],"Tren de Montenvers y Mar de Glace":[45.93437,6.91573],"Le Brévent":[45.93444,6.84585],"Lac Blanc":[45.98262,6.88886],"Centro de Chamonix":[45.92355,6.86975],"Musée Alpin de Chamonix":[45.92403,6.87126],"Lac des Gaillands":[45.91384,6.84871],"Bois du Bouchet":[45.93116,6.88058],"Cascade du Dard":[45.90362,6.86283],"Excursión a Annecy":[45.89923,6.12888],"La Calèche":[45.9228,6.86906],"Munchie":[45.92445,6.87041],"Le Monchu":[45.92258,6.87015],"Lac des Gaillands al atardecer":[45.91384,6.84871],"MBC (Micro Brasserie de Chamonix)":[45.92733,6.87575],"Chambre Neuf":[45.92281,6.87312],"Elevation 1904":[45.92298,6.87326],"Café Schuh":[46.68547,7.85671],"Harder Kulm":[46.69558,7.86285],"Höhematte":[46.68601,7.85733],"Unterseen (casco antiguo)":[46.68717,7.84964],"Cuevas de San Beato":[46.68467,7.78231],"Crucero por el lago de Brienz":[46.69045,7.869],"Iseltwald":[46.71046,7.96346],"Excursión al Jungfraujoch":[46.54758,7.97897],"Excursión al valle de Lauterbrunnen":[46.5939,7.9078],"Excursión a Grindelwald First":[46.62427,8.03675],"Excursión a Schynige Platte":[46.65226,7.91117],"Hüsi Bierhaus":[46.6861,7.85462],"Restaurant Bebbis":[46.68396,7.85213],"Restaurant Goldener Anker":[46.68619,7.85265],"Restaurante del Harder Kulm":[46.69968,7.85614],"Pasarela de los dos lagos (Harder Kulm)":[46.69968,7.85614],"Orilla del lago de Thun en Neuhaus":[46.68539,7.82195],"Mama's House (Fira)":[36.41723,25.43267],"Oia y su castillo":[36.46221,25.37573],"Fira y el paseo de la caldera":[36.41727,25.43242],"Ruta por la caldera de Fira a Oia":[36.4274,25.42828],"Imerovigli y la roca de Skaros":[36.43121,25.42504],"Pyrgos":[36.3826,25.45015],"Museo de la Thera Prehistórica":[36.4165,25.43258],"Yacimiento de Akrotiri":[36.35179,25.40349],"Playa Roja":[36.34734,25.39482],"Playa de Perissa":[36.35233,25.47235],"Playa de Kamari":[36.37615,25.48063],"Bahía de Ammoudi":[36.46041,25.37107],"Catamarán por la caldera":[36.33749,25.43496],"Lucky's Souvlakis":[36.41727,25.43242],"Pitogyros (Oia)":[36.46259,25.37788],"Metaxi Mas":[36.38795,25.45736],"Ammoudi Fish Tavern":[36.46062,25.37023],"Melitini (Oia)":[36.46267,25.38088],"Atardecer en el castillo de Oia":[36.46018,25.37302],"Santo Wines al atardecer":[36.38757,25.43651],"Koo Club":[36.419,25.43159]});
+Object.assign(LOCALES,{CH:{n:"Suiza",bk:"08:30",lunch:"12:00",dinner:"19:00",night:"21:30",club:"23:30",tz:1,dst:1,tip:"El servicio va incluido: como mucho se redondea.",meal:"Se come de 11:30 a 13:30 y se cena desde las 18:30-19:00; en los pueblos de montaña las cocinas cierran pronto."}});
+Object.assign(KEYCC,{palma:"ES",chamonix:"FR",interlaken:"CH",santorini:"GR"});
+Object.assign(FARES,{palma:"billete de bus EMT (~2 €)",chamonix:"bus del valle gratis con la «carte d'hôte» de tu alojamiento",interlaken:"bus local gratis con la Interlaken Guest Card de tu alojamiento",santorini:"~2-3 € (bus KTEL)"});
+Object.assign(CURR,{palma:{eur:1,mult:1},chamonix:{eur:1,mult:1.2},interlaken:{sym:"CHF",rate:.94,step:1,mult:1.6},santorini:{eur:1,mult:1.1}});
+Object.assign(ALIAS,{palma:"palma","palma de mallorca":"palma",mallorca:"palma",chamonix:"chamonix","chamonix-mont-blanc":"chamonix","chamonix mont blanc":"chamonix",interlaken:"interlaken",santorini:"santorini",santorin:"santorini",thira:"santorini"});
+Object.assign(AUXQ,{palma:"Palma",chamonix:"Chamonix-Mont-Blanc",interlaken:"Interlaken",santorini:"Santorini"});
+DESTINOS.forEach(d=>{if(d.n==="Santorini")d.key="santorini";});
+DESTINOS.push({n:"Palma de Mallorca",c:"España",fl:"🇪🇸",key:"palma"},{n:"Chamonix",c:"Francia",fl:"🇫🇷",key:"chamonix"},{n:"Interlaken",c:"Suiza",fl:"🇨🇭",key:"interlaken"});
+Object.assign(TRANSIT,{
+  palma:"El casco antiguo se hace andando. Bus EMT para Santa Catalina, Bellver, Portixol y el aeropuerto (línea A1). Para la sierra de Tramuntana, bus TIB o el tren de Sóller desde la plaza de España.",
+  chamonix:"Con la «carte d'hôte» que te da el alojamiento, los buses del valle y el tren de Chamonix a Vallorcine son gratis. Los teleféricos se pagan aparte (el Mont Blanc Multipass sale a cuenta si subes a dos o más). Mira el parte: con nubes arriba no se ve nada.",
+  interlaken:"Con la Interlaken Guest Card de tu alojamiento, el bus local es gratis. Para el valle de Lauterbrunnen, Grindelwald y el Jungfraujoch, los trenes salen de Interlaken Ost: mira si te compensa el Jungfrau Travel Pass. Todo va puntual: no apures los transbordos.",
+  santorini:"Los buses KTEL salen de Fira a Oia, las playas y Akrotiri (se paga en el bus, en efectivo). Para moverte a tu aire, quad o coche de alquiler (aparcar en Oia al atardecer es casi imposible). De noviembre a marzo casi todo cierra.",
+});
+SEASON.push(
+  [/aiguille du midi/i,[1,2,3,4,5,6,7,8,9,10,12],"todo el año salvo noviembre (mantenimiento)"],
+  [/montenvers|mar de glace/i,[1,2,3,4,5,6,7,8,9,10,12],"todo el año salvo noviembre"],
+  [/br[eé]vent/i,[1,2,3,4,6,7,8,9,10,12],"de junio a octubre y en la temporada de esquí (diciembre a abril)"],
+  [/^lac blanc$/i,[6,7,8,9],"de junio a septiembre (con nieve, solo con experiencia de montaña)"],
+  [/cascade du dard/i,[5,6,7,8,9,10],"de mayo a octubre"],
+  [/harder kulm|dos lagos/i,[4,5,6,7,8,9,10,11],"de abril a noviembre"],
+  [/schynige platte/i,[6,7,8,9,10],"de junio a octubre"],
+  [/san beato/i,[4,5,6,7,8,9,10,11],"de abril a noviembre (aprox.)"],
+  [/catamar[aá]n por la caldera/i,[4,5,6,7,8,9,10],"de abril a octubre"],
+  [/koo club/i,[5,6,7,8,9,10],"de mayo a octubre"],
+  [/ammoudi fish|melitini|pitogyros|santo wines/i,[4,5,6,7,8,9,10],"de abril a octubre (en invierno muchos cierran)"],
+  [/playa de perissa|playa de kamari|playa roja|playa de es trenc/i,[5,6,7,8,9,10],"de mayo a octubre (para bañarse)"]);
+CLOSED.push([/es baluard/i,1,"los lunes"],[/almudaina/i,1,"los lunes"],[/catedral de mallorca/i,0,"los domingos (solo misas)"],[/mercat de l'olivar/i,0,"los domingos"]);
+BOOK.push([/aiguille du midi/i,"unos días (1-2 semanas en verano)","Subida con hora asignada: en temporada alta se agota."],[/jungfraujoch/i,"unos días","En verano, reserva plaza en el tren; y mira el parte: con nubes no se ve nada."],[/catamar[aá]n/i,"unos días","Plazas limitadas, sobre todo al atardecer."],[/metaxi mas/i,"unos días","Siempre lleno."],[/marc fosh/i,"2-3 semanas","Estrella Michelin: pocas mesas."]);
+DURX.push([/aiguille du midi/i,210],[/montenvers/i,180],[/br[eé]vent/i,180],[/^lac blanc$/i,300],[/harder kulm$/i,120],[/akrotiri/i,90],[/catamar[aá]n/i,300],[/caldera de fira a oia/i,240],[/oia y su castillo/i,120],[/san beato/i,90],[/castell de bellver/i,90]);
+HILLHOW.push(
+  [/castell de bellver/i,"Sube andando por el bosque desde la calle de Bellver (unos 20 min de cuesta) o en taxi hasta la puerta."],
+  [/aiguille du midi/i,"Teleférico desde la plaza de la Aiguille du Midi, en el centro: unos 20 minutos hasta arriba (con transbordo en el Plan de l'Aiguille)."],
+  [/montenvers|mar de glace/i,"Tren de cremallera del Montenvers, desde su estación junto a la de tren de Chamonix: 20 minutos."],
+  [/br[eé]vent/i,"Telecabina de Planpraz desde lo alto del centro y teleférico hasta el Brévent."],
+  [/^lac blanc$/i,"Telesilla de La Flégère desde Les Praz (bus del valle) y 1 h 30-2 h de subida a pie."],
+  [/harder kulm|dos lagos/i,"Funicular Harderbahn desde Interlaken Ost: 10 minutos."],
+  [/skaros|imerovigli/i,"Bus de Fira a Imerovigli y bajada a pie por escaleras hasta la roca (luego toca subirlas)."]);
+Object.assign(VENUEX,{
+  "Aiguille du Midi":{busy:"Sube en el primer teleférico (desde las 8:00) o a última hora: a media mañana hay colas largas.",bring:"Abrigo, gafas de sol y crema aunque abajo haga calor: arriba puede haber -10 °C. Si te mareas con la altura, sube despacio.",price:"Unos 75-80 € ida y vuelta (adulto)",tip:"Mira las webcams antes de pagar: con nubes arriba no se ve nada. El billete tiene hora de subida."},
+  "Tren de Montenvers y Mar de Glace":{busy:"A primera hora o después de comer.",bring:"Calzado cómodo: hay unos 500 escalones hasta la gruta de hielo (y vuelta).",price:"Unos 40 € (adulto)",tip:"Fíjate en los carteles con los años: marcan hasta dónde llegaba el glaciar. Impresiona."},
+  "Excursión al Jungfraujoch":{busy:"Sal en los primeros trenes: a mediodía arriba hay mucha gente.",bring:"Abrigo, gafas de sol y crema. A 3.454 m te cansas antes: ve despacio.",price:"Unos 200-240 CHF ida y vuelta (~210-255 €; menos con abonos)",tip:"Si va a estar nublado, cámbialo por Grindelwald First o el Harder Kulm: no merece la pena pagar para ver niebla."},
+  "Harder Kulm":{busy:"Al atardecer se llena; por la mañana, tranquilo.",bring:"Una chaqueta: arriba refresca.",price:"Unos 40 CHF ida y vuelta (~43 €)",tip:"Desde la pasarela se ven los dos lagos a la vez. El restaurante de arriba merece una cena en temporada."},
+  "Atardecer en el castillo de Oia":{busy:"Una hora antes del ocaso ya no cabe nadie; en verano, más.",bring:"Paciencia y agua.",price:"Gratis",tip:"Para verlo sin agobios, ve al molino de Oia o a una terraza de Imerovigli: el atardecer es el mismo."},
+  "Catedral de Mallorca (La Seu)":{busy:"A primera hora (abre a las 10:00) o a última; en crucero hay colas a media mañana.",bring:"Hombros cubiertos.",price:"€€",tip:"En una mañana de sol, la luz del rosetón mayor se proyecta en la pared de enfrente; el 2 de febrero y el 11 de noviembre forma un «8» de luz que la gente va a ver."},
+  "Castell de Bellver":{busy:"Por la mañana o a última hora con la luz del atardecer sobre la bahía.",bring:"Agua: la subida tiene cuesta.",price:"Unos 4 € (gratis los domingos)",tip:"Sube a la azotea de la torre: es la mejor vista de Palma."},
+});
+

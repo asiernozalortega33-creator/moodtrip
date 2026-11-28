@@ -25,4 +25,4 @@ jobs:
         working-directory: tests
         env:
           CHROME_PATH: /usr/bin/google-chrome
-        run: node run.js humo-ciudades.js nombres-duplicados.js horarios-discotecas.js validacion.js edicion.js presupuesto.js perfiles-af.js
+        run: node run.js

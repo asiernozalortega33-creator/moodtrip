@@ -9,7 +9,7 @@ const { spawn } = require("child_process");
 const path = require("path"), fs = require("fs");
 const puppeteer = require("puppeteer-core");
 const CHROME = process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe";
-const files = process.argv.slice(2).length ? process.argv.slice(2) : ["humo-ciudades.js", "nombres-duplicados.js", "horarios-discotecas.js", "cuestas.js", "validacion.js", "edicion.js", "presupuesto.js", "perfiles-af.js"];
+const files = process.argv.slice(2).length ? process.argv.slice(2) : ["humo-ciudades.js", "nombres-duplicados.js", "horarios-discotecas.js", "cuestas.js", "validacion.js", "temporadas.js", "edicion.js", "presupuesto.js", "perfiles-af.js"];
 // una prueba falla si lo dice: líneas «>>» sin «todo bien»/«sin problemas», «MAL», errores o duplicados
 function reportsFailure(txt) {
   return txt.split("\n").some(l => /^\s*>>/.test(l) && !/todo bien|sin problemas/.test(l))
